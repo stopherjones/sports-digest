@@ -49,4 +49,11 @@ def fetch_sports_data_with_gemini(start_date, end_date, date_str):
         config=generation_config
     )
 
-    return json.loads(response.text)
+# Clean potential markdown block wrappers from LLM output
+    raw_text = response.text.strip()
+    if raw_text.startswith("```"):
+        raw_text = raw_text.split("\n", 1)[1].rsplit("\n", 1)[0]
+        if raw_text.startswith("json"):
+            raw_text = raw_text[4:].strip()
+
+    return json.loads(raw_text)
