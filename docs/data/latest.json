@@ -1,0 +1,27 @@
+{
+  "week_ending": "2026-07-20",
+  "dashboard": [
+    {
+      "event": "EPL Season Opener",
+      "status": "Commencing",
+      "detail": "Pre-season wraps up; Matchday 1 kicks off this weekend."
+    },
+    {
+      "event": "AFL Round 20",
+      "status": "Ongoing",
+      "detail": "Top 8 battle intensifies in the final stretch."
+    },
+    {
+      "event": "The Open Championship",
+      "status": "Concluding",
+      "detail": "Final round wrapped up at Royal Birkdale."
+    }
+  ],
+  "surprises": [
+    {
+      "title": "All-Ireland Senior Hurling Final",
+      "location": "Dublin, Ireland",
+      "description": "One of Europe's fastest, most intense amateur field sports crowns its champion at a packed Croke Park."
+    }
+  ]
+}
