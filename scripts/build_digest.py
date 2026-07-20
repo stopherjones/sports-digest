@@ -19,7 +19,14 @@ def fetch_sports_data_with_gemini(start_date, end_date, date_str):
         raise ValueError("GEMINI_API_KEY environment variable is missing.")
 
     client = genai.Client(api_key=api_key)
-    model_name = os.environ.get("GEMINI_MODEL", "gemini-1.5-flash")
+
+    # Build a fallback candidate list to prevent 404 errors if model names change
+    models_to_try = []
+    if os.environ.get("GEMINI_MODEL"):
+        models_to_try.append(os.environ.get("GEMINI_MODEL"))
+    models_to_try.extend(["gemini-2.5-flash", "gemini-2.0-flash", "gemini-1.5-flash"])
+    # Preserve order while removing duplicates
+    models_to_try = list(dict.fromkeys(models_to_try))
 
     prompt = f"""
     You are an expert sports journalist generating an automated global weekly sports digest for the week ending {end_date} (period: {start_date} to {end_date}).
@@ -57,11 +64,25 @@ def fetch_sports_data_with_gemini(start_date, end_date, date_str):
         tools=[{"google_search": {}}]
     )
 
-    response = client.models.generate_content(
-        model=model_name,
-        contents=prompt,
-        config=generation_config
-    )
+    response = None
+    last_error = None
+
+    for model_name in models_to_try:
+        try:
+            print(f"Attempting content generation with model: {model_name}...")
+            response = client.models.generate_content(
+                model=model_name,
+                contents=prompt,
+                config=generation_config
+            )
+            print(f"Successfully generated digest using {model_name}.")
+            break
+        except Exception as e:
+            print(f"Model {model_name} unavailable or failed: {e}")
+            last_error = e
+
+    if response is None:
+        raise RuntimeError(f"All attempted models failed. Last error: {last_error}")
 
     # Clean potential markdown block wrappers from LLM output
     raw_text = response.text.strip()
@@ -111,7 +132,7 @@ def main():
     start_date, end_date, date_str = get_target_dates()
     print(f"Fetching sports data for period: {start_date} to {end_date}...")
 
-    # 1. Fetch live data via Gemini API
+    # 1. Fetch live data via Gemini API with automatic model fallback
     data = fetch_sports_data_with_gemini(start_date, end_date, date_str)
 
     # 2. Save JSON for GitHub Pages Frontend with UTF-8 encoding
