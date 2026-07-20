@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Global Sports Digest Dashboard</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@1/css/pico.min.css">
+  <style>
+    body { padding: 20px 0; }
+    .status-badge { font-weight: bold; padding: 2px 8px; border-radius: 4px; font-size: 0.85em; background: #e0e0e0; color: #333; }
+  </style>
+</head>
+<body>
+  <main class="container">
+    <header>
+      <h1>🏆 Global Sports Digest</h1>
+      <p id="week-ending"><small>Loading latest update...</small></p>
+    </header>
+
+    <hr>
+
+    <section>
+      <h2>Executive Dashboard</h2>
+      <figure>
+        <table role="grid">
+          <thead>
+            <tr>
+              <th>Status</th>
+              <th>Event</th>
+              <th>Summary</th>
+            </tr>
+          </thead>
+          <tbody id="dashboard-rows">
+          </tbody>
+        </table>
+      </figure>
+    </section>
+
+    <section>
+      <h2>Wildcard Spotlight 🎯</h2>
+      <div id="surprises-container"></div>
+    </section>
+  </main>
+
+  <script>
+    fetch('./data/latest.json')
+      .then(res => res.json())
+      .then(data => {
+        document.getElementById('week-ending').innerText = `Week Ending: ${data.week_ending}`;
+        
+        // Render Dashboard Table
+        const rows = data.dashboard.map(d => `
+          <tr>
+            <td><span class="status-badge">${d.status}</span></td>
+            <td><strong>${d.event}</strong></td>
+            <td>${d.detail}</td>
+          </tr>
+        `).join('');
+        document.getElementById('dashboard-rows').innerHTML = rows;
+
+        // Render Surprises
+        const surprises = data.surprises.map(s => `
+          <article>
+            <header><strong>${s.title}</strong> — <small>${s.location}</small></header>
+            ${s.description}
+          </article>
+        `).join('');
+        document.getElementById('surprises-container').innerHTML = surprises;
+      })
+      .catch(err => {
+        document.getElementById('week-ending').innerText = 'Failed to load data.';
+        console.error(err);
+      });
+  </script>
+</body>
+</html>
