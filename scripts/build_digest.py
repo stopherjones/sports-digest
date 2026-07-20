@@ -53,12 +53,9 @@ def fetch_sports_data_with_gemini(start_date, end_date, date_str):
 
     # Use Gemini 2.5 Flash with live Google Search tool enabled
     response = client.models.generate_content(
-        model='gemini-2.5-flash',
+        model="gemini-2.5-flash",
         contents=prompt,
-        config=types.GenerateContentConfig(
-            response_mime_type="application/json",
-            tools=[{"google_search": {}}]
-        )
+        config=config
     )
 
     return json.loads(response.text)
