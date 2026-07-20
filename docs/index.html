@@ -3,11 +3,32 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Global Sports Digest Dashboard</title>
+  <title>Global Sports Digest</title>
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@1/css/pico.min.css">
   <style>
     body { padding: 20px 0; }
-    .status-badge { font-weight: bold; padding: 2px 8px; border-radius: 4px; font-size: 0.85em; background: #e0e0e0; color: #333; }
+    .highlight-box {
+      border-left: 4px solid var(--primary);
+      padding: 1.25rem;
+      margin-bottom: 2rem;
+      border-radius: 0 8px 8px 0;
+      background-color: var(--card-background-color);
+    }
+    .cards-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 1.5rem;
+    }
+    .sport-card {
+      margin-bottom: 0;
+    }
+    .previous-winner {
+      font-size: 0.85em;
+      padding: 6px 10px;
+      border-radius: 4px;
+      background: rgba(0, 0, 0, 0.05);
+      margin-top: 1rem;
+    }
   </style>
 </head>
 <body>
@@ -17,28 +38,19 @@
       <p id="week-ending"><small>Loading latest update...</small></p>
     </header>
 
-    <hr>
-
+    <!-- Highlights Section -->
     <section>
-      <h2>Executive Dashboard</h2>
-      <figure>
-        <table role="grid">
-          <thead>
-            <tr>
-              <th>Status</th>
-              <th>Event</th>
-              <th>Summary</th>
-            </tr>
-          </thead>
-          <tbody id="dashboard-rows">
-          </tbody>
-        </table>
-      </figure>
+      <h2>✨ This Week's Highlights</h2>
+      <div class="highlight-box">
+        <p><strong>Last Week:</strong> <span id="last-week-highlight">Loading...</span></p>
+        <p style="margin-bottom: 0;"><strong>This Week:</strong> <span id="this-week-highlight">Loading...</span></p>
+      </div>
     </section>
 
+    <!-- Sport Cards Section -->
     <section>
-      <h2>Wildcard Spotlight 🎯</h2>
-      <div id="surprises-container"></div>
+      <h2>🏅 Sport Focus</h2>
+      <div id="cards-container" class="cards-grid"></div>
     </section>
   </main>
 
@@ -47,25 +59,23 @@
       .then(res => res.json())
       .then(data => {
         document.getElementById('week-ending').innerText = `Week Ending: ${data.week_ending}`;
-        
-        // Render Dashboard Table
-        const rows = data.dashboard.map(d => `
-          <tr>
-            <td><span class="status-badge">${d.status}</span></td>
-            <td><strong>${d.event}</strong></td>
-            <td>${d.detail}</td>
-          </tr>
-        `).join('');
-        document.getElementById('dashboard-rows').innerHTML = rows;
+        document.getElementById('last-week-highlight').innerText = data.highlights.last_week;
+        document.getElementById('this-week-highlight').innerText = data.highlights.this_week;
 
-        // Render Surprises
-        const surprises = data.surprises.map(s => `
-          <article>
-            <header><strong>${s.title}</strong> — <small>${s.location}</small></header>
-            ${s.description}
+        const cardsHTML = data.sports_cards.map(card => `
+          <article class="sport-card">
+            <header>
+              <h3 style="margin: 0;">${card.icon} ${card.sport}</h3>
+              <small><strong>${card.event}</strong> — ${card.status}</small>
+            </header>
+            <p>${card.details}</p>
+            <div class="previous-winner">
+              🏆 <strong>Previous Winner:</strong> ${card.previous_winner}
+            </div>
           </article>
         `).join('');
-        document.getElementById('surprises-container').innerHTML = surprises;
+
+        document.getElementById('cards-container').innerHTML = cardsHTML;
       })
       .catch(err => {
         document.getElementById('week-ending').innerText = 'Failed to load data.';
