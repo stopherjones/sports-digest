@@ -1,27 +1,25 @@
 {
-  "week_ending": "2026-07-20",
-  "dashboard": [
+  "week_ending": "2026-07-26",
+  "highlights": {
+    "last_week": "The 2026 FIFA World Cup reached its climax on Sunday 19 July at MetLife Stadium, crowning the new world champions after a 39-day tournament across North America.",
+    "this_week": "The 2026 Tour de France enters its brutal final mountain stretch through the Alps before the traditional sprint finish on the Champs-\u00c9lys\u00e9es in Paris this Sunday, 26 July."
+  },
+  "sports_cards": [
     {
-      "event": "EPL Season Opener",
-      "status": "Commencing",
-      "detail": "Pre-season wraps up; Matchday 1 kicks off this weekend."
+      "sport": "Football",
+      "icon": "\u26bd",
+      "event": "FIFA World Cup 2026",
+      "status": "Concluded (19 July 2026)",
+      "details": "The expanded 48-team tournament wrapped up after six weeks of action across Canada, Mexico, and the United States. Following 104 matches, world football's biggest prize was awarded in New Jersey.",
+      "previous_winner": "Argentina (2022)"
     },
     {
-      "event": "AFL Round 20",
-      "status": "Ongoing",
-      "detail": "Top 8 battle intensifies in the final stretch."
-    },
-    {
-      "event": "The Open Championship",
-      "status": "Concluding",
-      "detail": "Final round wrapped up at Royal Birkdale."
-    }
-  ],
-  "surprises": [
-    {
-      "title": "All-Ireland Senior Hurling Final",
-      "location": "Dublin, Ireland",
-      "description": "One of Europe's fastest, most intense amateur field sports crowns its champion at a packed Croke Park."
+      "sport": "Cycling",
+      "icon": "\ud83d\udeb4",
+      "event": "Tour de France 2026",
+      "status": "In Progress (Finishes 26 July 2026)",
+      "details": "The peloton tackles high-altitude Alpine passes this week before Sunday's final ceremonial and sprint leg into Paris. General Classification contenders face their final opportunities on the mountain summits.",
+      "previous_winner": "Tadej Poga\u010dar (2025 \u2014 4th title)"
     }
   ]
 }
