@@ -2,8 +2,8 @@ name: Weekly Digest Pipeline
 
 on:
   schedule:
-    - cron: '0 6 * * 1' # Runs every Monday at 06:00 UTC
-  workflow_dispatch:      # Allows manual triggering from GitHub UI
+    - cron: '0 6 * * 1'  # 6am UTC every Monday
+  workflow_dispatch:
 
 permissions:
   contents: write
@@ -25,18 +25,27 @@ jobs:
       - name: Install dependencies
         run: pip install -r scripts/requirements.txt
 
-      - name: Execute script
-        env:
-          RESEND_API_KEY: ${{ secrets.RESEND_API_KEY }}
-          USER_EMAIL: ${{ secrets.USER_EMAIL }}
+      - name: Build Digest Data & HTML
         run: python scripts/build_digest.py
 
-      - name: Commit updated JSON
+      - name: Send Email Digest via Gmail
+        uses: dawidd6/action-send-mail@v3
+        with:
+          server_address: smtp.gmail.com
+          server_port: 465
+          username: ${{ secrets.MAIL_USERNAME }}
+          password: ${{ secrets.MAIL_PASSWORD }}
+          to: ${{ secrets.MAIL_TO }}
+          from: Global Sports Digest
+          subject: 🏆 Weekly Sports Digest
+          html_body: file://docs/email.html
+
+      - name: Commit updated JSON and HTML
         run: |
           git config --global user.name "github-actions[bot]"
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
-          git add docs/data/latest.json
-          git commit -m "chore: update weekly digest data [skip ci]" || exit 0
+          git add docs/
+          git commit -m "chore: update weekly digest [skip ci]" || exit 0
           git push
 
       - name: Deploy to GitHub Pages
