@@ -1,5 +1,6 @@
 import os
 import json
+import time
 import datetime
 from google import genai
 from google.genai import types
@@ -20,11 +21,17 @@ def fetch_sports_data_with_gemini(start_date, end_date, date_str):
 
     client = genai.Client(api_key=api_key)
 
-    # Build a fallback candidate list to prevent 404 errors if model names change
+    # Candidates to attempt in order of preference
     models_to_try = []
     if os.environ.get("GEMINI_MODEL"):
         models_to_try.append(os.environ.get("GEMINI_MODEL"))
-    models_to_try.extend(["gemini-2.5-flash", "gemini-2.0-flash", "gemini-1.5-flash"])
+    
+    models_to_try.extend([
+        "gemini-2.0-flash",
+        "gemini-2.5-flash",
+        "gemini-2.5-flash-lite",
+        "gemini-1.5-flash"
+    ])
     # Preserve order while removing duplicates
     models_to_try = list(dict.fromkeys(models_to_try))
 
@@ -68,18 +75,34 @@ def fetch_sports_data_with_gemini(start_date, end_date, date_str):
     last_error = None
 
     for model_name in models_to_try:
-        try:
-            print(f"Attempting content generation with model: {model_name}...")
-            response = client.models.generate_content(
-                model=model_name,
-                contents=prompt,
-                config=generation_config
-            )
-            print(f"Successfully generated digest using {model_name}.")
+        max_retries = 3
+        for attempt in range(1, max_retries + 1):
+            try:
+                print(f"Attempting content generation with model: {model_name} (Attempt {attempt}/{max_retries})...")
+                response = client.models.generate_content(
+                    model=model_name,
+                    contents=prompt,
+                    config=generation_config
+                )
+                print(f"Successfully generated digest using {model_name}.")
+                break
+            except Exception as e:
+                err_msg = str(e)
+                last_error = e
+
+                if "404" in err_msg or "NOT_FOUND" in err_msg:
+                    print(f"Model {model_name} returned 404 (Not Found). Skipping to next model...")
+                    break
+                elif "429" in err_msg or "RESOURCE_EXHAUSTED" in err_msg:
+                    wait_time = 20 * attempt
+                    print(f"Model {model_name} hit rate limit (429). Waiting {wait_time}s before retrying...")
+                    time.sleep(wait_time)
+                else:
+                    print(f"Model {model_name} failed with error: {e}")
+                    time.sleep(5)
+
+        if response is not None:
             break
-        except Exception as e:
-            print(f"Model {model_name} unavailable or failed: {e}")
-            last_error = e
 
     if response is None:
         raise RuntimeError(f"All attempted models failed. Last error: {last_error}")
@@ -132,7 +155,7 @@ def main():
     start_date, end_date, date_str = get_target_dates()
     print(f"Fetching sports data for period: {start_date} to {end_date}...")
 
-    # 1. Fetch live data via Gemini API with automatic model fallback
+    # 1. Fetch live data via Gemini API with retry mechanism
     data = fetch_sports_data_with_gemini(start_date, end_date, date_str)
 
     # 2. Save JSON for GitHub Pages Frontend with UTF-8 encoding
