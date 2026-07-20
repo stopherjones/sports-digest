@@ -26,6 +26,8 @@ jobs:
         run: pip install -r scripts/requirements.txt
 
       - name: Build Digest Data & HTML
+        env:
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
         run: python scripts/build_digest.py
 
       - name: Send Email Digest via Gmail
