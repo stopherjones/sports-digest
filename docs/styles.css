@@ -10,14 +10,70 @@ body {
   background-color: var(--card-background-color);
 }
 
+/* 3-column grid scaling down on smaller screens */
 .cards-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  gap: 1.5rem;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1rem;
+  margin-bottom: 2.5rem;
 }
 
+@media (max-width: 900px) {
+  .cards-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 600px) {
+  .cards-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Compact Card Layout */
 .sport-card {
+  padding: 0.85rem 1rem;
   margin-bottom: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  border-radius: 8px;
+  background-color: var(--card-background-color, #1a212d);
+  border: 1px solid var(--border-color, #2d3748);
+}
+
+.sport-card header {
+  margin-bottom: 0.4rem;
+  padding-bottom: 0.4rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.sport-card h3 {
+  font-size: 1.05rem;
+  margin: 0 0 0.2rem 0;
+  line-height: 1.3;
+}
+
+.sport-card h3 a {
+  color: var(--primary, #3b82f6);
+  text-decoration: none;
+}
+
+.sport-card h3 a:hover {
+  text-decoration: underline;
+}
+
+.card-dates {
+  font-size: 0.82rem;
+  color: var(--muted-color, #a0aec0);
+}
+
+.card-body {
+  font-size: 0.88rem;
+}
+
+.card-body p {
+  margin: 0;
 }
 
 .previous-winner {

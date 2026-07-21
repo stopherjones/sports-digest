@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Global Sports Digest</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@1/css/pico.min.css">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <main class="container">
+    <header style="margin-bottom: 2rem;">
+      <h1>🏆 Global Sports Digest</h1>
+      <p id="generated-at"><small>Loading latest update...</small></p>
+    </header>
+
+    <!-- Top Section: This Week (Results + Starting Soon) -->
+    <section id="section-this-week" style="display: none;">
+      <h2>⚡ This Week</h2>
+      <div id="this-week-container" class="cards-grid"></div>
+    </section>
+
+    <!-- Second Section: Ongoing Events -->
+    <section id="section-ongoing" style="display: none;">
+      <h2>🔄 Ongoing Events</h2>
+      <div id="ongoing-container" class="cards-grid"></div>
+    </section>
+
+    <!-- Third Section: Remaining / Future Events -->
+    <section id="section-future" style="display: none;">
+      <h2>📅 Upcoming & Future Events</h2>
+      <div id="future-container" class="cards-grid"></div>
+    </section>
+  </main>
+
+  <script>
+    // Universal Card Builder
+    function createCardHtml(card) {
+      const wikiUrl = card.wikipedia_title 
+        ? `https://en.wikipedia.org/wiki/${encodeURIComponent(card.wikipedia_title)}`
+        : '#';
+      
+      // Clean date string: only show single date if start == end
+      const dateStr = (!card.end_date || card.start_date === card.end_date)
+        ? card.start_date
+        : `${card.start_date} – ${card.end_date}`;
+
+      // Dynamic status priority: Result > Current Leader > Previous Holder
+      let statusHtml = '';
+      if (card.winner) {
+        statusHtml = `🏆 <strong>Result:</strong> ${card.winner}`;
+      } else if (card.current_leader) {
+        statusHtml = `🟡 <strong>Leader:</strong> ${card.current_leader}`;
+      } else if (card.previous_holder) {
+        statusHtml = `📜 <strong>Defending:</strong> ${card.previous_holder}`;
+      }
+
+      return `
+        <article class="sport-card">
+          <header>
+            <h3>
+              <a href="${wikiUrl}" target="_blank" rel="noopener noreferrer">
+                ${card.icon || '🏆'} ${card.event}
+              </a>
+            </h3>
+            <div class="card-dates">${dateStr}</div>
+          </header>
+          <div class="card-body">
+            ${statusHtml ? `<p>${statusHtml}</p>` : ''}
+          </div>
+        </article>
+      `;
+    }
+
+    fetch('./data/digest.json')
+      .then(res => {
+        if (!res.ok) throw new Error(`HTTP error! Status: ${res.status}`);
+        return res.json();
+      })
+      .then(data => {
+        document.getElementById('generated-at').innerText = `Updated: ${data.generated_at}`;
+
+        // Helper to populate grid sections
+        const renderGrid = (items, containerId, sectionId) => {
+          const container = document.getElementById(containerId);
+          const section = document.getElementById(sectionId);
+
+          if (items && items.length > 0) {
+            container.innerHTML = items.map(createCardHtml).join('');
+            section.style.display = 'block';
+          } else {
+            section.style.display = 'none';
+          }
+        };
+
+        // 1. Top Section: This Week (Recent results + Starting soon)
+        const thisWeekItems = [
+          ...(data.recent_results || []),
+          ...(data.starting_soon || [])
+        ];
+        renderGrid(thisWeekItems, 'this-week-container', 'section-this-week');
+
+        // 2. Second Section: Ongoing Events (Ending soon + Active seasons, deduplicated)
+        const ongoingRaw = [
+          ...(data.ending_soon || []),
+          ...(data.active_seasons || [])
+        ];
+        const ongoingItems = Array.from(new Map(ongoingRaw.map(item => [item.event, item])).values());
+        renderGrid(ongoingItems, 'ongoing-container', 'section-ongoing');
+
+        // 3. Third Section: Remaining Scheduled Events
+        renderGrid(data.future_events || [], 'future-container', 'section-future');
+      })
+      .catch(err => {
+        document.getElementById('generated-at').innerText = 'Failed to load sports digest data.';
+        console.error(err);
+      });
+  </script>
+</body>
+</html>
