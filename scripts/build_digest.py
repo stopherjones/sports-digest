@@ -29,8 +29,7 @@ def fetch_wikipedia_text(wiki_title: str) -> str:
             content = soup.find("div", {"id": "bodyContent"})
             text = content.get_text(separator=" ") if content else soup.get_text(separator=" ")
             
-            # Collapse extra whitespace and take first 8,000 characters
-            # (Covers Infobox, lead sections, and current standings tables)
+            # Collapse extra whitespace and take first 25,000 characters
             clean_text = " ".join(text.split())
             return clean_text[:25000]
     except Exception as e:
@@ -183,6 +182,9 @@ def process_event_lifecycle(events: list, today: datetime, groq_client: Groq | N
                 if winner and winner != "Result pending verification":
                     event["previous_holder"] = f"{winner} ({event['name']})"
                 
+                # Store old Wikipedia page title as the previous event reference BEFORE overwriting
+                event["previous_event_wikipedia_title"] = event.get("wikipedia_title")
+
                 # Overwrite fields in place for the next edition
                 event["name"] = next_edition["name"]
                 event["wikipedia_title"] = next_edition["wikipedia_title"]
@@ -215,7 +217,8 @@ def process_event_lifecycle(events: list, today: datetime, groq_client: Groq | N
                 "start_date": event["start_date"],
                 "end_date": event["end_date"],
                 "days_left": days_until_start,
-                "previous_holder": event.get("previous_holder")
+                "previous_holder": event.get("previous_holder"),
+                "previous_event_wikipedia_title": event.get("previous_event_wikipedia_title")
             })
 
         # Second Section: Ongoing / Ending Soon
@@ -229,7 +232,8 @@ def process_event_lifecycle(events: list, today: datetime, groq_client: Groq | N
                 "end_date": event["end_date"],
                 "days_remaining": days_until_end,
                 "current_leader": event.get("current_leader"),
-                "previous_holder": event.get("previous_holder")
+                "previous_holder": event.get("previous_holder"),
+                "previous_event_wikipedia_title": event.get("previous_event_wikipedia_title")
             })
 
         # Top Section: Recent Results
@@ -245,7 +249,8 @@ def process_event_lifecycle(events: list, today: datetime, groq_client: Groq | N
                 "winner": event.get("winner") or "Result pending verification",
                 "runner_up": event.get("runner_up", "N/A"),
                 "score": event.get("score", "N/A"),
-                "previous_holder": event.get("previous_holder")
+                "previous_holder": event.get("previous_holder"),
+                "previous_event_wikipedia_title": event.get("previous_event_wikipedia_title")
             })
 
         # Second Section: Long-running Active Seasons (e.g. MLB, F1)
@@ -258,7 +263,8 @@ def process_event_lifecycle(events: list, today: datetime, groq_client: Groq | N
                 "start_date": event["start_date"],
                 "end_date": event["end_date"],
                 "current_leader": event.get("current_leader"),
-                "previous_holder": event.get("previous_holder")
+                "previous_holder": event.get("previous_holder"),
+                "previous_event_wikipedia_title": event.get("previous_event_wikipedia_title")
             })
 
         # Third Section: Remaining Scheduled / Future Events
@@ -270,7 +276,8 @@ def process_event_lifecycle(events: list, today: datetime, groq_client: Groq | N
                 "wikipedia_title": event["wikipedia_title"],
                 "start_date": event["start_date"],
                 "end_date": event["end_date"],
-                "previous_holder": event.get("previous_holder")
+                "previous_holder": event.get("previous_holder"),
+                "previous_event_wikipedia_title": event.get("previous_event_wikipedia_title")
             })
 
         updated_master.append(event)

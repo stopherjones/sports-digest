@@ -9,7 +9,8 @@
       "start_date": "2026-07-23",
       "end_date": "2026-08-02",
       "days_left": 1,
-      "previous_holder": "Australia (2022)"
+      "previous_holder": "Australia (2022)",
+      "previous_event_wikipedia_title": null
     }
   ],
   "ending_soon": [
@@ -22,7 +23,8 @@
       "end_date": "2026-07-26",
       "days_remaining": 4,
       "current_leader": "Tadej Pogačar",
-      "previous_holder": "Jonas Vingegaard (2025)"
+      "previous_holder": "Jonas Vingegaard (2025)",
+      "previous_event_wikipedia_title": null
     }
   ],
   "recent_results": [
@@ -37,7 +39,8 @@
       "winner": "Spain",
       "runner_up": "Argentina",
       "score": "1-0 (a.e.t.)",
-      "previous_holder": "Argentina (2022)"
+      "previous_holder": "Argentina (2022)",
+      "previous_event_wikipedia_title": null
     }
   ],
   "active_seasons": [
@@ -49,7 +52,8 @@
       "start_date": "2026-03-08",
       "end_date": "2026-12-06",
       "current_leader": "Kimi Antonelli",
-      "previous_holder": "Max Verstappen (2025)"
+      "previous_holder": "Max Verstappen (2025)",
+      "previous_event_wikipedia_title": null
     },
     {
       "event": "2026 Major League Baseball Season",
@@ -59,7 +63,8 @@
       "start_date": "2026-03-25",
       "end_date": "2026-11-01",
       "current_leader": "Milwaukee Brewers",
-      "previous_holder": "Los Angeles Dodgers (2025 Champions)"
+      "previous_holder": "Los Angeles Dodgers (2025 Champions)",
+      "previous_event_wikipedia_title": null
     }
   ],
   "future_events": [
@@ -70,7 +75,8 @@
       "wikipedia_title": "2026–27_NBA_season",
       "start_date": "2026-10-20",
       "end_date": "2027-06-20",
-      "previous_holder": "New York Knicks (2025–26 Champions)"
+      "previous_holder": "New York Knicks (2025–26 Champions)",
+      "previous_event_wikipedia_title": null
     },
     {
       "event": "2026 NFL Season",
@@ -79,7 +85,8 @@
       "wikipedia_title": "2026_NFL_season",
       "start_date": "2026-09-10",
       "end_date": "2027-02-14",
-      "previous_holder": "Seattle Seahawks (Super Bowl LX Champions)"
+      "previous_holder": "Seattle Seahawks (Super Bowl LX Champions)",
+      "previous_event_wikipedia_title": null
     },
     {
       "event": "Copa América",
@@ -88,7 +95,8 @@
       "wikipedia_title": "Copa_América",
       "start_date": "2028-06-16",
       "end_date": "2028-07-16",
-      "previous_holder": "Argentina (2024 Champions)"
+      "previous_holder": "Argentina (2024 Champions)",
+      "previous_event_wikipedia_title": null
     },
     {
       "event": "2026–27 Copa del Rey",
@@ -97,7 +105,8 @@
       "wikipedia_title": "2026–27_Copa_del_Rey",
       "start_date": "2026-08-01",
       "end_date": "2027-04-17",
-      "previous_holder": "Real Sociedad (2025–26 Copa del Rey)"
+      "previous_holder": "Real Sociedad (2025–26 Copa del Rey)",
+      "previous_event_wikipedia_title": null
     },
     {
       "event": "2026–27 Premier League",
@@ -106,7 +115,8 @@
       "wikipedia_title": "2026–27_Premier_League",
       "start_date": "2026-08-21",
       "end_date": "2027-05-30",
-      "previous_holder": "Arsenal (2025–26 Champions)"
+      "previous_holder": "Arsenal (2025–26 Champions)",
+      "previous_event_wikipedia_title": null
     },
     {
       "event": "2026–27 FA Cup",
@@ -115,7 +125,8 @@
       "wikipedia_title": "2026–27_FA_Cup",
       "start_date": "2026-08-08",
       "end_date": "2027-05-22",
-      "previous_holder": "Manchester City"
+      "previous_holder": "Manchester City",
+      "previous_event_wikipedia_title": null
     },
     {
       "event": "2028 ICC Men's T20 World Cup",
@@ -124,7 +135,8 @@
       "wikipedia_title": "2028_ICC_Men's_T20_World_Cup",
       "start_date": "2028-10-01",
       "end_date": "2028-11-12",
-      "previous_holder": "India (2026 ICC Men's T20 World Cup)"
+      "previous_holder": "India (2026 ICC Men's T20 World Cup)",
+      "previous_event_wikipedia_title": null
     },
     {
       "event": "2027 Indian Premier League",
@@ -133,7 +145,8 @@
       "wikipedia_title": "2027_Indian_Premier_League",
       "start_date": "2027-03-01",
       "end_date": "2027-05-31",
-      "previous_holder": "Royal Challengers Bengaluru (2026 Indian Premier League)"
+      "previous_holder": "Royal Challengers Bengaluru (2026 Indian Premier League)",
+      "previous_event_wikipedia_title": null
     }
   ]
 }
