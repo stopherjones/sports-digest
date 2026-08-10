@@ -19,15 +19,37 @@ jobs:
         run: |
           curl -sL "${{ secrets.GOOGLE_SHEETS_CSV_URL }}" -o data.csv
 
-      - name: Convert CSV to JSON
+      - name: Convert CSV to JSON and attach logos
         run: |
           python -c "
-          import csv, json
+          import csv, json, os
+
+          # 1. Load existing logos from data.json
+          existing_logos = {}
+          if os.path.exists('data.json'):
+              try:
+                  with open('data.json', mode='r', encoding='utf-8') as f:
+                      existing_data = json.load(f)
+                      for item in existing_data:
+                          key = item.get('Event Name')
+                          if key and 'Logo' in item:
+                              existing_logos[key] = item['Logo']
+              except Exception as e:
+                  print(f'Warning: Could not parse existing data.json: {e}')
+
+          # 2. Read new data from Google Sheets CSV
           with open('data.csv', mode='r', encoding='utf-8') as f:
               reader = csv.DictReader(f)
-              data = list(reader)
+              new_data = list(reader)
+
+          # 3. Add Logo field to every item using cached data or fallback to empty string
+          for item in new_data:
+              key = item.get('Event Name')
+              item['Logo'] = existing_logos.get(key, '')
+
+          # 4. Save merged output back to data.json
           with open('data.json', mode='w', encoding='utf-8') as f:
-              json.dump(data, f, indent=2)
+              json.dump(new_data, f, indent=2, ensure_ascii=False)
           "
 
       - name: Commit and push updated data files
