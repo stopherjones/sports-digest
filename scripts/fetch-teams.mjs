@@ -22,7 +22,15 @@ const TEAMS_CONFIG = [
     tableSlug: 'league-two',
     espnId: '383',
     leagueSlug: 'eng.4'
-  }
+  },
+  {
+  name: 'Cleveland Browns',
+  searchName: 'Cleveland Browns',
+  bbcSlug: 'cleveland-browns!',
+  sportSlug: 'football',
+  espnId: '5',
+  leagueSlug: 'nfl'
+}
 ];
 
 // Helper to format numbers to ordinal (1st, 2nd, 3rd, 4th...)
