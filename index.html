@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Stopherjones' Sports Tracker</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <div class="container">
+    <header>
+      <div class="header-brand">
+        <h1>Stopherjones' Sports Tracker</h1>
+      </div>
+      <nav class="header-nav">
+        <a href="#grid-finished" class="nav-btn">🏁 Finished</a>
+        <a href="#grid-climax" class="nav-btn">🔥 Climax</a>
+        <a href="#grid-ongoing" class="nav-btn">⚡ Ongoing</a>
+        <a href="#grid-future" class="nav-btn">📅 Upcoming</a>
+        <a href="#grid-past" class="nav-btn">📜 Past</a>
+      </nav>
+    </header>
+
+    <div id="loading">Loading tournament data...</div>
+
+    <div id="dashboard" style="display: none;">
+      
+      <!-- SEASON CLIMAX / FINALS PHASE -->
+      <div class="dashboard-section">
+        <div class="section-title">
+          <span>🔥 Season Climax / Finals Phase</span>
+          <span id="count-climax" class="badge-count">0</span>
+        </div>
+        <div id="grid-climax" class="grid"></div>
+      </div>
+
+      <!-- ONGOING EVENTS -->
+      <div class="dashboard-section">
+        <div class="section-title">
+          <span>🟢 Ongoing Events</span>
+          <span id="count-ongoing" class="badge-count">0</span>
+        </div>
+        <div id="grid-ongoing" class="grid"></div>
+      </div>
+
+      <!-- JUST FINISHED EVENTS -->
+      <div class="dashboard-section">
+        <div class="section-title">
+          <span>🏁 Just Finished (Last 14 Days)</span>
+          <span id="count-finished" class="badge-count">0</span>
+        </div>
+        <div id="grid-finished" class="grid"></div>
+      </div>
+
+      <!-- FUTURE EVENTS -->
+      <div class="dashboard-section">
+        <div class="section-title">
+          <span>📅 Upcoming Events (Next 30 Days)</span>
+          <span id="count-future" class="badge-count">0</span>
+        </div>
+        <div id="grid-future" class="grid"></div>
+      </div>
+
+      <!-- PAST EVENTS -->
+      <div class="dashboard-section">
+        <div class="section-title">
+          <span>📜 Past Events</span>
+          <span id="count-past" class="badge-count">0</span>
+        </div>
+        <div id="grid-past" class="grid"></div>
+      </div>
+
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,37 @@
+name: Sync Google Sheets Data
+
+on:
+  schedule:
+    - cron: '30 13 * * 1'
+  workflow_dispatch:
+
+jobs:
+  sync-data:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Download CSV from Google Sheets
+        run: |
+          curl -sL "${{ secrets.GOOGLE_SHEETS_CSV_URL }}" -o data.csv
+
+      - name: Convert CSV to JSON
+        run: |
+          python -c "
+          import csv, json
+          with open('data.csv', mode='r', encoding='utf-8') as f:
+              reader = csv.DictReader(f)
+              data = list(reader)
+          with open('data.json', mode='w', encoding='utf-8') as f:
+              json.dump(data, f, indent=2)
+          "
+
+      - name: Commit and push updated data files
+        uses: stefanzweifel/git-auto-commit-action@v5
+        with:
+          commit_message: "chrono: Automated weekly Google Sheets data sync (JSON)"
+          file_pattern: "data.csv data.json"

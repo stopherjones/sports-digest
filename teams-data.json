@@ -1,0 +1,74 @@
+{
+  "updatedAt": "2026-08-10T08:42:46.925Z",
+  "teams": [
+    {
+      "id": "manchester-united",
+      "name": "Manchester United",
+      "searchName": "Man Utd",
+      "latestResult": {
+        "opponent": "Paris Saint-Germain",
+        "score": "1–1",
+        "result": "D",
+        "date": "8 Aug",
+        "competition": "Club Friendlies - Club Friendlies 1"
+      },
+      "leaguePosition": {
+        "league": "Premier League",
+        "rank": 16,
+        "points": 0,
+        "played": 0
+      },
+      "nextFixture": {
+        "opponent": "Leeds United",
+        "date": "12 Aug",
+        "time": "18:30",
+        "competition": "Club Friendlies - Club Friendlies 1"
+      },
+      "cupProgress": "None active"
+    },
+    {
+      "id": "plymouth-argyle",
+      "name": "Plymouth Argyle",
+      "searchName": "Plymouth",
+      "latestResult": null,
+      "leaguePosition": {
+        "league": "League One",
+        "rank": 18,
+        "points": 0,
+        "played": 0
+      },
+      "nextFixture": {
+        "opponent": "Exeter City",
+        "date": "10 Aug",
+        "time": "19:00",
+        "competition": "League Cup - 1st Round"
+      },
+      "cupProgress": "League Cup - 1st Round • EFL Trophy - Group Stage - Southern Group E"
+    },
+    {
+      "id": "truro-city",
+      "name": "Truro City",
+      "searchName": "Truro",
+      "latestResult": {
+        "opponent": "Maidenhead United",
+        "score": "2–0",
+        "result": "W",
+        "date": "8 Aug",
+        "competition": "National League N / S - South"
+      },
+      "leaguePosition": {
+        "league": "National League N / S",
+        "rank": 6,
+        "points": 3,
+        "played": 1
+      },
+      "nextFixture": {
+        "opponent": "Chelmsford City",
+        "date": "15 Aug",
+        "time": "14:00",
+        "competition": "National League N / S - South"
+      },
+      "cupProgress": "National League Cup - Group Stage - Group D"
+    }
+  ]
+}

@@ -1,0 +1,400 @@
+/* ==========================================================================
+   1. VARIABLES & GLOBAL RESETS
+   ========================================================================== */
+:root {
+  --bg: #0f172a;
+  --card-bg: #1e293b;
+  --border: #334155;
+  --text: #f8fafc;
+  --text-muted: #94a3b8;
+  --accent-climax: #f43f5e;
+  --accent-ongoing: #10b981;
+  --accent-finished: #3b82f6;
+  --accent-future: #f59e0b;
+  --accent-past: #64748b;
+  --link-color: #60a5fa;
+  --sport-pill-bg: #334155;
+  --climax-bg: rgba(244, 63, 94, 0.12);
+  --climax-border: rgba(244, 63, 94, 0.35);
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+  background-color: var(--bg);
+  color: var(--text);
+  line-height: 1.5;
+  padding: 0 1rem 2.5rem; /* Top padding removed so sticky header fits flush to top */
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+p.subtitle {
+  color: var(--text-muted);
+  font-size: 0.95rem;
+  margin-top: 0.5rem;
+  margin-bottom: 1.5rem;
+}
+
+/* ==========================================================================
+   2. RESPONSIVE STICKY GLASSMORPHIC HEADER
+   ========================================================================== */
+header {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  background: rgba(15, 23, 42, 0.92);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+  margin-left: -1rem;
+  margin-right: -1rem;
+}
+
+header h1 {
+  font-weight: 700;
+  color: #f8fafc;
+  white-space: nowrap;
+}
+
+/* Navigation button container */
+.header-nav {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  overflow-x: auto;
+  white-space: nowrap;
+  scrollbar-width: none; /* Hide scrollbar Firefox */
+  -ms-overflow-style: none; /* Hide scrollbar IE/Edge */
+  -webkit-overflow-scrolling: touch; /* Smooth iOS momentum scrolling */
+}
+
+.header-nav::-webkit-scrollbar {
+  display: none; /* Hide scrollbar Chrome/Safari */
+}
+
+/* Navigation pills */
+.nav-btn {
+  font-size: 0.8rem;
+  font-weight: 600;
+  padding: 5px 12px;
+  border-radius: 9999px;
+  text-decoration: none;
+  color: #cbd5e1;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  transition: background 0.15s ease, color 0.15s ease;
+  white-space: nowrap;
+  flex-shrink: 0;
+  touch-action: manipulation; /* Eliminates 300ms mobile tap delay */
+  -webkit-tap-highlight-color: transparent;
+}
+
+.nav-btn:active,
+.nav-btn:hover {
+  background: rgba(255, 255, 255, 0.22);
+  color: #ffffff;
+  border-color: rgba(255, 255, 255, 0.35);
+}
+
+/* --- Header Breakpoints --- */
+
+/* Mobile Layout (Screens 640px and under) */
+@media (max-width: 640px) {
+  header {
+    display: flex;
+    flex-direction: column;
+    padding: 10px 16px;
+    gap: 8px;
+  }
+
+  header h1 {
+    font-size: 1.05rem;
+  }
+
+  .header-nav {
+    width: 100%;
+    padding-bottom: 2px;
+  }
+
+  .dashboard-section {
+    scroll-margin-top: 92px; /* Scroll offset for 2-row mobile header */
+  }
+}
+
+/* Desktop Layout (Screens 641px and wider) */
+@media (min-width: 641px) {
+  header {
+    height: 52px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 24px;
+  }
+
+  header h1 {
+    font-size: 1.15rem;
+  }
+
+  .dashboard-section {
+    scroll-margin-top: 68px; /* Scroll offset for 1-row desktop header */
+  }
+}
+
+/* ==========================================================================
+   3. DASHBOARD SECTIONS & GRID LAYOUT
+   ========================================================================== */
+.dashboard-section {
+  margin-bottom: 2.5rem;
+}
+
+.section-title {
+  font-size: 1.25rem;
+  font-weight: 600;
+  margin: 1.5rem 0 1rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.badge-count {
+  background: var(--border);
+  font-size: 0.8rem;
+  padding: 0.1rem 0.5rem;
+  border-radius: 12px;
+  color: var(--text-muted);
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 1.25rem;
+}
+
+/* ==========================================================================
+   4. CARD COMPONENT STYLES
+   ========================================================================== */
+.card {
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 1.25rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+}
+
+.card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+}
+
+.card.climax::before  { background-color: var(--accent-climax); }
+.card.ongoing::before { background-color: var(--accent-ongoing); }
+.card.finished::before{ background-color: var(--accent-finished); }
+.card.future::before  { background-color: var(--accent-future); }
+.card.past::before    { background-color: var(--accent-past); }
+
+.card-header {
+  margin-bottom: 0.5rem;
+}
+
+.tag-row {
+  display: flex;
+  gap: 0.4rem;
+  margin-bottom: 0.4rem;
+  align-items: center;
+}
+
+.sport-tag {
+  display: inline-block;
+  font-size: 0.7rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  background: var(--sport-pill-bg);
+  color: var(--text-muted);
+  padding: 0.15rem 0.45rem;
+  border-radius: 4px;
+}
+
+.climax-tag {
+  display: inline-block;
+  font-size: 0.7rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  background: rgba(244, 63, 94, 0.2);
+  color: #fda4af;
+  border: 1px solid rgba(244, 63, 94, 0.4);
+  padding: 0.15rem 0.45rem;
+  border-radius: 4px;
+}
+
+.event-name {
+  font-size: 1.15rem;
+  font-weight: 600;
+  color: var(--text);
+}
+
+.dates {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  margin-top: 0.25rem;
+}
+
+/* Climax Highlight Banner Inside Cards */
+.climax-banner {
+  background: var(--climax-bg);
+  border: 1px solid var(--climax-border);
+  border-radius: 6px;
+  padding: 0.5rem 0.75rem;
+  margin: 0.6rem 0;
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+}
+
+.climax-banner-icon {
+  font-size: 1.1rem;
+}
+
+.climax-banner-details {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.25;
+}
+
+.climax-banner-title {
+  font-size: 0.825rem;
+  font-weight: 700;
+  color: #fda4af;
+}
+
+.climax-banner-date {
+  font-size: 0.775rem;
+  color: var(--text);
+  font-weight: 500;
+}
+
+.card-body {
+  border-top: 1px dashed var(--border);
+  padding-top: 0.75rem;
+  margin-top: 0.5rem;
+  font-size: 0.9rem;
+}
+
+.data-row {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 0.35rem;
+}
+
+.data-label {
+  color: var(--text-muted);
+}
+
+.data-value {
+  font-weight: 500;
+  text-align: right;
+}
+
+.empty-state {
+  color: var(--text-muted);
+  font-style: italic;
+  font-size: 0.9rem;
+  grid-column: 1 / -1;
+}
+
+#loading {
+  text-align: center;
+  padding: 3rem;
+  color: var(--text-muted);
+}
+
+/* ==========================================================================
+   5. CARD ACTION BUTTONS
+   ========================================================================== */
+.card-actions {
+  display: flex;
+  gap: 8px;
+  margin-top: 0.85rem;
+  padding-top: 0.75rem;
+  border-top: 1px solid var(--border);
+}
+
+.ai-search-btn,
+.yt-search-btn {
+  min-width: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.45rem 0.5rem;
+  font-size: 0.8rem;
+  font-weight: 500;
+  text-decoration: none;
+  border-radius: 6px;
+  transition: all 0.2s ease;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  text-align: center;
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* Google AI Overview Button (60% Width) */
+.ai-search-btn {
+  flex: 6 1 0;
+  background: rgba(59, 130, 246, 0.1);
+  border: 1px solid rgba(59, 130, 246, 0.3);
+  color: var(--link-color);
+}
+
+.ai-search-btn:hover {
+  background: rgba(59, 130, 246, 0.25);
+  border-color: var(--link-color);
+  color: #93c5fd;
+}
+
+/* YouTube Highlights/Teaser Button (40% Width) */
+.yt-search-btn {
+  flex: 4 1 0;
+  background: rgba(244, 63, 94, 0.1);
+  border: 1px solid rgba(244, 63, 94, 0.3);
+  color: #fda4af;
+}
+
+.yt-search-btn:hover {
+  background: rgba(244, 63, 94, 0.25);
+  border-color: #f43f5e;
+  color: #fecdd3;
+}
+
+/* Responsive adjustment for extra narrow mobile screens */
+@media (max-width: 380px) {
+  .card-actions {
+    flex-direction: column;
+    gap: 8px;
+  }
+}
