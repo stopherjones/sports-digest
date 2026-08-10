@@ -1,25 +1,25 @@
 {
-  "updatedAt": "2026-08-10T08:53:39.112Z",
+  "updatedAt": "2026-08-10T09:01:42.166Z",
   "teams": [
     {
-      "id": "manchester-united",
-      "name": "Manchester United",
-      "searchName": "Man Utd",
+      "id": "leeds-united",
+      "name": "Leeds United",
+      "searchName": "Leeds Utd",
       "latestResult": {
-        "opponent": "Paris Saint-Germain",
-        "score": "1–1",
-        "result": "D",
+        "opponent": "RB Leipzig",
+        "score": "2–0",
+        "result": "W",
         "date": "8 Aug",
-        "competition": "Club Friendlies - Club Friendlies 1"
+        "competition": "Club Friendlies - Club Friendlies 3"
       },
       "leaguePosition": {
-        "league": "Premier League",
-        "rank": 16,
+        "league": "premier-league",
+        "rank": "N/A",
         "points": 0,
         "played": 0
       },
       "nextFixture": {
-        "opponent": "Leeds United",
+        "opponent": "Manchester United",
         "date": "12 Aug",
         "time": "18:30",
         "competition": "Club Friendlies - Club Friendlies 1"
@@ -27,48 +27,29 @@
       "cupProgress": "None active"
     },
     {
-      "id": "plymouth-argyle",
-      "name": "Plymouth Argyle",
-      "searchName": "Plymouth",
-      "latestResult": null,
+      "id": "york-city",
+      "name": "York City",
+      "searchName": "York City",
+      "latestResult": {
+        "opponent": "Crawley Town",
+        "score": "0–2",
+        "result": "L",
+        "date": "3 Aug",
+        "competition": "League Cup - Preliminary Round"
+      },
       "leaguePosition": {
-        "league": "League One",
-        "rank": 18,
+        "league": "League Two",
+        "rank": 24,
         "points": 0,
         "played": 0
       },
       "nextFixture": {
-        "opponent": "Exeter City",
-        "date": "10 Aug",
-        "time": "19:00",
-        "competition": "League Cup - 1st Round"
-      },
-      "cupProgress": "League Cup - 1st Round • EFL Trophy - Group Stage - Southern Group E"
-    },
-    {
-      "id": "truro-city",
-      "name": "Truro City",
-      "searchName": "Truro",
-      "latestResult": {
-        "opponent": "Maidenhead United",
-        "score": "2–0",
-        "result": "W",
-        "date": "8 Aug",
-        "competition": "National League N / S - South"
-      },
-      "leaguePosition": {
-        "league": "National League N / S",
-        "rank": 6,
-        "points": 3,
-        "played": 1
-      },
-      "nextFixture": {
-        "opponent": "Chelmsford City",
+        "opponent": "Bristol Rovers",
         "date": "15 Aug",
         "time": "14:00",
-        "competition": "National League N / S - South"
+        "competition": "League Two"
       },
-      "cupProgress": "National League Cup - Group Stage - Group D"
+      "cupProgress": "League Cup - Preliminary Round • EFL Trophy - Group Stage - Northern Group C"
     }
   ]
 }
