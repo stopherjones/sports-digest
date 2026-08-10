@@ -13,7 +13,7 @@ const TEAMS_CONFIG = [
     searchName: 'Leeds',
     bbcSlug: 'leeds-united',
     tableSlug: 'premier-league',
-    logo: 'https://a.espncdn.com/i/teamlogos/soccer/500/357.png',
+    logo: 'https://upload.wikimedia.org/wikipedia/en/thumb/5/54/Leeds_United_F.C._logo.svg/120px-Leeds_United_F.C._logo.svg.png',
     defaultCups: [
       { name: 'FA Cup', defaultRound: '3rd Round' },
       { name: 'EFL Cup', defaultRound: '2nd Round' }
@@ -25,7 +25,7 @@ const TEAMS_CONFIG = [
     searchName: 'York',
     bbcSlug: 'york-city',
     tableSlug: 'league-two',
-    logo: 'https://a.espncdn.com/i/teamlogos/soccer/500/320.png',
+    logo: 'https://upload.wikimedia.org/wikipedia/en/thumb/7/71/York_City_FC.svg/120px-York_City_FC.svg.png',
     defaultCups: [
       { name: 'FA Cup', defaultRound: '1st Round' }
     ]
@@ -36,7 +36,7 @@ const TEAMS_CONFIG = [
     searchName: 'Cleveland Browns',
     espnTeamAbbrev: 'cle',
     espnTeamId: '5',
-    logo: 'https://a.espncdn.com/i/teamlogos/nfl/500/cle.png'
+    logo: 'https://upload.wikimedia.org/wikipedia/en/thumb/d/d9/Cleveland_Browns_logo.svg/120px-Cleveland_Browns_logo.svg.png'
   }
 ];
 
@@ -108,7 +108,7 @@ async function fetchSoccerTeam(team) {
 
   for (const k of Object.keys(parsed.data || {})) {
     if (k.startsWith('topic-header') || k.includes('header')) {
-      if (parsed.data[k]?.data?.badgeImage?.src) {
+      if (parsed.data[k]?.data?.badgeImage?.src && !team.logo) {
         fetchedLogo = parsed.data[k].data.badgeImage.src;
       }
     }
@@ -338,7 +338,7 @@ async function fetchNFLTeam(team) {
   const data = await res.json();
   const events = data.events || [];
 
-  const fetchedLogo = data.team?.logo || team.logo;
+  const fetchedLogo = team.logo || data.team?.logo;
 
   events.sort((a, b) => new Date(a.date) - new Date(b.date));
   const now = new Date();

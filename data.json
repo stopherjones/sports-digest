@@ -14,7 +14,8 @@
     "Runner-up": "",
     "Final Score": "",
     "Next Iteration": "2027 NFL season",
-    "Next Start Date": "1 September 2027"
+    "Next Start Date": "1 September 2027",
+    "Logo": "https://upload.wikimedia.org/wikipedia/en/thumb/a/a2/National_Football_League_logo.svg/120px-National_Football_League_logo.svg.png"
   },
   {
     "Sport": "Aussie Rules",
@@ -31,7 +32,8 @@
     "Runner-up": "",
     "Final Score": "",
     "Next Iteration": "2027 AFL season",
-    "Next Start Date": ""
+    "Next Start Date": "",
+    "Logo": "https://upload.wikimedia.org/wikipedia/en/thumb/e/e4/Australian_Football_League.svg/120px-Australian_Football_League.svg.png"
   },
   {
     "Sport": "Baseball",
@@ -48,12 +50,13 @@
     "Runner-up": "",
     "Final Score": "",
     "Next Iteration": "2027 MLB season",
-    "Next Start Date": "1 March 2027"
+    "Next Start Date": "1 March 2027",
+    "Logo": "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a6/Major_League_Baseball_logo.svg/120px-Major_League_Baseball_logo.svg.png"
   },
   {
     "Sport": "Basketball",
     "Common Name": "2025/26 NBA season",
-    "Event Name": "2025\u201326_NBA_season",
+    "Event Name": "2025–26_NBA_season",
     "Climax name": "NBA Finals",
     "Climax slug": "2026_NBA_Finals",
     "Start Date": "21 October 2025",
@@ -65,7 +68,8 @@
     "Runner-up": "San Antonio Spurs",
     "Final Score": "4-1 (series)",
     "Next Iteration": "2026/27 NBA season",
-    "Next Start Date": "1 October 2026"
+    "Next Start Date": "1 October 2026",
+    "Logo": "https://upload.wikimedia.org/wikipedia/en/thumb/0/03/National_Basketball_Association_logo.svg/120px-National_Basketball_Association_logo.svg.png"
   },
   {
     "Sport": "Cricket",
@@ -82,7 +86,8 @@
     "Runner-up": "India",
     "Final Score": "Australia won by 6 wickets",
     "Next Iteration": "2027 Cricket World Cup",
-    "Next Start Date": "Not specified"
+    "Next Start Date": "Not specified",
+    "Logo": "https://upload.wikimedia.org/wikipedia/en/thumb/e/eb/2023_CWC_Logo.svg/120px-2023_CWC_Logo.svg.png"
   },
   {
     "Sport": "Cricket",
@@ -99,7 +104,8 @@
     "Runner-up": "New Zealand",
     "Final Score": "India won by 96 runs",
     "Next Iteration": "2028 Men's T20 World Cup",
-    "Next Start Date": "Not specified"
+    "Next Start Date": "Not specified",
+    "Logo": "https://upload.wikimedia.org/wikipedia/en/thumb/f/fa/2026_ICC_Men%27s_T20_World_Cup_logo.svg/120px-2026_ICC_Men%27s_T20_World_Cup_logo.svg.png"
   },
   {
     "Sport": "Cricket",
@@ -116,7 +122,8 @@
     "Runner-up": "Sunrisers Hyderabad",
     "Final Score": "won by 8 wickets",
     "Next Iteration": "2027 Indian Premier League",
-    "Next Start Date": "1 March 2027"
+    "Next Start Date": "1 March 2027",
+    "Logo": "https://upload.wikimedia.org/wikipedia/en/thumb/8/84/Indian_Premier_League_Official_Logo.svg/120px-Indian_Premier_League_Official_Logo.svg.png"
   },
   {
     "Sport": "Cricket",
@@ -133,7 +140,8 @@
     "Runner-up": "",
     "Final Score": "",
     "Next Iteration": "2026 County Championship",
-    "Next Start Date": "1 April 2027"
+    "Next Start Date": "1 April 2027",
+    "Logo": "https://upload.wikimedia.org/wikipedia/en/thumb/9/91/County_Championship_cricket_logo.svg/120px-County_Championship_cricket_logo.svg.png"
   },
   {
     "Sport": "Cycling",
@@ -145,19 +153,20 @@
     "End Date": "26 July 2026",
     "Climax start date": "26 July 2026",
     "Climax end date": "26 July 2026",
-    "Defending Champion": "Tadej Poga\u010dar",
-    "Winner": "Tadej Poga\u010dar",
+    "Defending Champion": "Tadej Pogačar",
+    "Winner": "Tadej Pogačar",
     "Runner-up": "Remco Evenepoel",
     "Final Score": "73h 56' 26\"",
     "Next Iteration": "2027 Tour de France",
-    "Next Start Date": "1 July 2027"
+    "Next Start Date": "1 July 2027",
+    "Logo": "https://upload.wikimedia.org/wikipedia/commons/thumb/5/50/Tour_de_France_logo_%28black_background%29.svg/120px-Tour_de_France_logo_%28black_background%29.svg.png"
   },
   {
     "Sport": "Football",
-    "Common Name": "2024 Copa Am\u00e9rica",
-    "Event Name": "2024_Copa_Am\u00e9rica",
-    "Climax name": "Copa Am\u00e9rica Final",
-    "Climax slug": "2024_Copa_Am\u00e9rica_final",
+    "Common Name": "2024 Copa América",
+    "Event Name": "2024_Copa_América",
+    "Climax name": "Copa América Final",
+    "Climax slug": "2024_Copa_América_final",
     "Start Date": "20 June 2024",
     "End Date": "14 July 2024",
     "Climax start date": "14 July 2024",
@@ -166,8 +175,9 @@
     "Winner": "Argentina",
     "Runner-up": "Colombia",
     "Final Score": "1-0",
-    "Next Iteration": "2028 Copa Am\u00e9rica",
-    "Next Start Date": "1 June 2028"
+    "Next Iteration": "2028 Copa América",
+    "Next Start Date": "1 June 2028",
+    "Logo": "https://upload.wikimedia.org/wikipedia/en/thumb/4/45/2024_Copa_Am%C3%A9rica_logo.svg/120px-2024_Copa_Am%C3%A9rica_logo.svg.png"
   },
   {
     "Sport": "Football",
@@ -184,12 +194,13 @@
     "Runner-up": "Nigeria",
     "Final Score": "2-1",
     "Next Iteration": "2027 Africa Cup of Nations",
-    "Next Start Date": "1 June 2027"
+    "Next Start Date": "1 June 2027",
+    "Logo": "https://upload.wikimedia.org/wikipedia/en/thumb/8/85/2025_Africa_Cup_of_Nations_logo.svg/120px-2025_Africa_Cup_of_Nations_logo.svg.png"
   },
   {
     "Sport": "Football",
     "Common Name": "2025/26 FA Cup",
-    "Event Name": "2025\u201326_FA_Cup",
+    "Event Name": "2025–26_FA_Cup",
     "Climax name": "FA Cup Final",
     "Climax slug": "2026_FA_Cup_final",
     "Start Date": "31 October 2025",
@@ -201,7 +212,8 @@
     "Runner-up": "Chelsea",
     "Final Score": "1-0",
     "Next Iteration": "2026-27 FA Cup",
-    "Next Start Date": "7 November 2026"
+    "Next Start Date": "7 November 2026",
+    "Logo": "https://upload.wikimedia.org/wikipedia/en/thumb/d/d5/FA_Cup_logo_%282020%29.svg/120px-FA_Cup_logo_%282020%29.svg.png"
   },
   {
     "Sport": "Football",
@@ -218,12 +230,13 @@
     "Runner-up": "Argentina",
     "Final Score": "1-0",
     "Next Iteration": "2030 FIFA World Cup",
-    "Next Start Date": "2030"
+    "Next Start Date": "2030",
+    "Logo": "https://upload.wikimedia.org/wikipedia/en/thumb/1/17/2026_FIFA_World_Cup_emblem.svg/120px-2026_FIFA_World_Cup_emblem.svg.png"
   },
   {
     "Sport": "Football",
     "Common Name": "2026/27 UEFA Champions League",
-    "Event Name": "2026\u201327_UEFA_Champions_League",
+    "Event Name": "2026–27_UEFA_Champions_League",
     "Climax name": "2027 Champions League Final",
     "Climax slug": "2027_UEFA_Champions_League_final",
     "Start Date": "15 September 2026",
@@ -235,7 +248,8 @@
     "Runner-up": "",
     "Final Score": "",
     "Next Iteration": "2027/28 UEFA Champions League",
-    "Next Start Date": "September 2027"
+    "Next Start Date": "September 2027",
+    "Logo": "https://upload.wikimedia.org/wikipedia/en/thumb/f/f5/UEFA_Champions_League.svg/120px-UEFA_Champions_League.svg.png"
   },
   {
     "Sport": "Football",
@@ -252,7 +266,8 @@
     "Runner-up": "",
     "Final Score": "",
     "Next Iteration": "2027-28 Premier League",
-    "Next Start Date": "1 August 2027"
+    "Next Start Date": "1 August 2027",
+    "Logo": "https://upload.wikimedia.org/wikipedia/en/thumb/f/f2/Premier_League_Logo.svg/120px-Premier_League_Logo.svg.png"
   },
   {
     "Sport": "Football ",
@@ -269,7 +284,8 @@
     "Runner-up": "",
     "Final Score": "",
     "Next Iteration": "2027 Copa Libertadores",
-    "Next Start Date": "1 February 2027"
+    "Next Start Date": "1 February 2027",
+    "Logo": "https://upload.wikimedia.org/wikipedia/en/thumb/a/a1/Copa_Libertadores_logo.svg/120px-Copa_Libertadores_logo.svg.png"
   },
   {
     "Sport": "Gaelic Football",
@@ -284,9 +300,10 @@
     "Defending Champion": "Kerry",
     "Winner": "Mayo",
     "Runner-up": "Kerry",
-    "Final Score": "1\u201320 to 1\u201317",
+    "Final Score": "1–20 to 1–17",
     "Next Iteration": "2027 All-Ireland Football Championship",
-    "Next Start Date": "1 April 2027"
+    "Next Start Date": "1 April 2027",
+    "Logo": "https://upload.wikimedia.org/wikipedia/en/thumb/0/07/Gaelic_Athletic_Association_logo.svg/120px-Gaelic_Athletic_Association_logo.svg.png"
   },
   {
     "Sport": "Golf",
@@ -300,10 +317,11 @@
     "Climax end date": "12 April 2026",
     "Defending Champion": "Scottie Scheffler",
     "Winner": "Scottie Scheffler",
-    "Runner-up": "Ludvig \u00c5berg",
+    "Runner-up": "Ludvig Åberg",
     "Final Score": "-11 (277)",
     "Next Iteration": "2027 Masters Tournament",
-    "Next Start Date": "1 April 2027"
+    "Next Start Date": "1 April 2027",
+    "Logo": "https://upload.wikimedia.org/wikipedia/en/thumb/2/23/Masters_Logo.png/120px-Masters_Logo.png"
   },
   {
     "Sport": "Hurling",
@@ -318,14 +336,15 @@
     "Defending Champion": "Tipperary",
     "Winner": "Limerick",
     "Runner-up": "Galway",
-    "Final Score": "1\u201329 to 1\u201311",
+    "Final Score": "1–29 to 1–11",
     "Next Iteration": "2027 All-Ireland Senior Hurling Championship",
-    "Next Start Date": "1 July 2027"
+    "Next Start Date": "1 July 2027",
+    "Logo": "https://upload.wikimedia.org/wikipedia/en/thumb/0/07/Gaelic_Athletic_Association_logo.svg/120px-Gaelic_Athletic_Association_logo.svg.png"
   },
   {
     "Sport": "Ice Hockey",
     "Common Name": "2025/26 NHL season",
-    "Event Name": "2025\u201326_NHL_season",
+    "Event Name": "2025–26_NHL_season",
     "Climax name": "Stanley Cup Finals",
     "Climax slug": "2026_Stanley_Cup_Finals",
     "Start Date": "7 October 2025",
@@ -337,7 +356,8 @@
     "Runner-up": "Vegas Golden Knights",
     "Final Score": "4-2 (series)",
     "Next Iteration": "2026/27 NHL season",
-    "Next Start Date": "1 October 2026"
+    "Next Start Date": "1 October 2026",
+    "Logo": "https://upload.wikimedia.org/wikipedia/en/thumb/3/3a/05_NHL_Shield.svg/120px-05_NHL_Shield.svg.png"
   },
   {
     "Sport": "Motorsport",
@@ -354,7 +374,8 @@
     "Runner-up": "Toyota Gazoo Racing",
     "Final Score": "311 laps",
     "Next Iteration": "2027 24 Hours of Le Mans",
-    "Next Start Date": "1 June 2027"
+    "Next Start Date": "1 June 2027",
+    "Logo": "https://upload.wikimedia.org/wikipedia/commons/thumb/f/fd/24_Hours_of_Le_Mans_logo_%28since_2014%29.svg/120px-24_Hours_of_Le_Mans_logo_%28since_2014%29.svg.png"
   },
   {
     "Sport": "Motorsport",
@@ -371,7 +392,8 @@
     "Runner-up": "",
     "Final Score": "",
     "Next Iteration": "2027 Bathurst 1000",
-    "Next Start Date": "1 October 2027"
+    "Next Start Date": "1 October 2027",
+    "Logo": "https://upload.wikimedia.org/wikipedia/en/thumb/8/8e/Supercars_logo.svg/120px-Supercars_logo.svg.png"
   },
   {
     "Sport": "Motorsport",
@@ -383,12 +405,13 @@
     "End Date": "22 November 2026",
     "Climax start date": "19 November 2026",
     "Climax end date": "22 November 2026",
-    "Defending Champion": "S\u00e9bastien Ogier",
+    "Defending Champion": "Sébastien Ogier",
     "Winner": "",
     "Runner-up": "",
     "Final Score": "",
     "Next Iteration": "2027 World Rally Championship",
-    "Next Start Date": "1 January 2027"
+    "Next Start Date": "1 January 2027",
+    "Logo": "https://upload.wikimedia.org/wikipedia/commons/thumb/9/9c/WRC.svg/120px-WRC.svg.png"
   },
   {
     "Sport": "Motorsport",
@@ -405,7 +428,8 @@
     "Runner-up": "",
     "Final Score": "",
     "Next Iteration": "2027 Formula One World Championship",
-    "Next Start Date": "1 March 2027"
+    "Next Start Date": "1 March 2027",
+    "Logo": "https://upload.wikimedia.org/wikipedia/commons/thumb/2/2d/Formula_One_logo.svg/120px-Formula_One_logo.svg.png"
   },
   {
     "Sport": "Rugby League",
@@ -422,7 +446,8 @@
     "Runner-up": "Brisbane Broncos",
     "Final Score": "30-24",
     "Next Iteration": "2027 World Club Cup",
-    "Next Start Date": "1 February 2027"
+    "Next Start Date": "1 February 2027",
+    "Logo": "https://upload.wikimedia.org/wikipedia/en/thumb/8/87/National_Rugby_League_logo.svg/120px-National_Rugby_League_logo.svg.png"
   },
   {
     "Sport": "Rugby League",
@@ -439,7 +464,8 @@
     "Runner-up": "",
     "Final Score": "",
     "Next Iteration": "2027 Super League",
-    "Next Start Date": "1 February 2027"
+    "Next Start Date": "1 February 2027",
+    "Logo": "https://upload.wikimedia.org/wikipedia/en/thumb/a/a9/Super_League_Europe_logo.svg/120px-Super_League_Europe_logo.svg.png"
   },
   {
     "Sport": "Rugby League",
@@ -456,7 +482,8 @@
     "Runner-up": "",
     "Final Score": "",
     "Next Iteration": "2027 NRL season",
-    "Next Start Date": "1 March 2027"
+    "Next Start Date": "1 March 2027",
+    "Logo": "https://upload.wikimedia.org/wikipedia/en/thumb/8/87/National_Rugby_League_logo.svg/120px-National_Rugby_League_logo.svg.png"
   },
   {
     "Sport": "Rugby Union",
@@ -473,7 +500,8 @@
     "Runner-up": "New Zealand",
     "Final Score": "12-11",
     "Next Iteration": "2027 Rugby World Cup",
-    "Next Start Date": "1 October 2027"
+    "Next Start Date": "1 October 2027",
+    "Logo": "https://upload.wikimedia.org/wikipedia/en/thumb/0/04/Rugby_World_Cup_2023_logo.svg/120px-Rugby_World_Cup_2023_logo.svg.png"
   },
   {
     "Sport": "Rugby Union",
@@ -490,31 +518,33 @@
     "Runner-up": "France",
     "Final Score": "15 pts",
     "Next Iteration": "2027 Six Nations Championship",
-    "Next Start Date": "1 February 2027"
+    "Next Start Date": "1 February 2027",
+    "Logo": "https://upload.wikimedia.org/wikipedia/en/thumb/0/02/Six_Nations_Championship_logo.svg/120px-Six_Nations_Championship_logo.svg.png"
   },
   {
     "Sport": "Rugby Union",
     "Common Name": "2025/26 European Rugby Champions Cup",
-    "Event Name": "2025\u201326_European_Rugby_Champions_Cup",
+    "Event Name": "2025–26_European_Rugby_Champions_Cup",
     "Climax name": "Champions Cup Final",
     "Climax slug": "2026_European_Rugby_Champions_Cup_final",
     "Start Date": "5 December 2025",
     "End Date": "23 May 2026",
     "Climax start date": "23 May 2026",
     "Climax end date": "23 May 2026",
-    "Defending Champion": "Bordeaux B\u00e8gles",
-    "Winner": "Bordeaux B\u00e8gles",
+    "Defending Champion": "Bordeaux Bègles",
+    "Winner": "Bordeaux Bègles",
     "Runner-up": "Leinster",
     "Final Score": "41-19",
     "Next Iteration": "2026/27 European Rugby Champions Cup",
-    "Next Start Date": "1 December 2026"
+    "Next Start Date": "1 December 2026",
+    "Logo": "https://upload.wikimedia.org/wikipedia/en/thumb/3/3f/European_Rugby_Champions_Cup_logo.svg/120px-European_Rugby_Champions_Cup_logo.svg.png"
   },
   {
     "Sport": "Tennis",
     "Common Name": "2026 Wimbledon Championships",
     "Event Name": "2026_Wimbledon_Championships",
     "Climax name": "Wimbledon Gentlemen's Singles Final",
-    "Climax slug": "2026_Wimbledon_Championships_\u2013_Men's_singles",
+    "Climax slug": "2026_Wimbledon_Championships_–_Men's_singles",
     "Start Date": "29 June 2026",
     "End Date": "12 July 2026",
     "Climax start date": "12 July 2026",
@@ -522,8 +552,9 @@
     "Defending Champion": "Jannik Sinner ",
     "Winner": "Jannik Sinner ",
     "Runner-up": "Alexander Zverev",
-    "Final Score": "6\u20137, 7\u20136, 6\u20133, 6\u20134",
+    "Final Score": "6–7, 7–6, 6–3, 6–4",
     "Next Iteration": "2027 Wimbledon Championships",
-    "Next Start Date": "1 June 2027"
+    "Next Start Date": "1 June 2027",
+    "Logo": "https://upload.wikimedia.org/wikipedia/en/thumb/b/b9/Wimbledon.svg/120px-Wimbledon.svg.png"
   }
 ]

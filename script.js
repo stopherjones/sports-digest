@@ -144,13 +144,23 @@ function createCard(row, category) {
   const cleanQuery = youtubeQuery.replace(/\s+/g, ' ').trim();
   const youtubeSearchUrl = `https://www.youtube.com/results?search_query=${encodeURIComponent(cleanQuery)}&sp=${spParam}`;
 
+  const logoUrl = getVal(row, "Logo") || getVal(row, "logo");
+  const logoHtml = logoUrl
+    ? `<img src="${logoUrl}" alt="${displayName} logo" class="team-badge-img" onerror="this.style.display='none'" />`
+    : "";
+
   let contentHtml = `
     <div class="card-header">
-      <div class="tag-row">
-        ${sportName ? `<span class="sport-tag">${sportName}</span>` : ""}
-        ${category === "climax" ? `<span class="climax-tag">🔥 Final Phase</span>` : ""}
+      <div class="card-header-flex">
+        ${logoHtml}
+        <div class="header-titles">
+          <div class="tag-row">
+            ${sportName ? `<span class="sport-tag">${sportName}</span>` : ""}
+            ${category === "climax" ? `<span class="climax-tag">🔥 Final Phase</span>` : ""}
+          </div>
+          <div class="event-name">${displayName}</div>
+        </div>
       </div>
-      <div class="event-name">${displayName}</div>
       <div class="dates">🗓️ ${getVal(row, "Start Date") || "TBD"} – ${getVal(row, "End Date") || "TBD"}</div>
     </div>
   `;
