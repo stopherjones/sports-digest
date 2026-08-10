@@ -26,7 +26,7 @@ const TEAMS_CONFIG = [
   {
   name: 'Cleveland Browns',
   searchName: 'Cleveland Browns',
-  bbcSlug: 'cleveland-browns!',
+  bbcSlug: 'cleveland-browns',
   sportSlug: 'football',
   espnId: '5',
   leagueSlug: 'nfl'
