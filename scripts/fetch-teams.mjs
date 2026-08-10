@@ -8,28 +8,20 @@ import fs from 'fs/promises';
 // ---------------------------------------------------------------------------
 const TEAMS_CONFIG = [
   {
-    name: 'Manchester United',
-    searchName: 'Man Utd',
-    bbcSlug: 'manchester-united',
+    name: 'Leeds United',
+    searchName: 'Leeds Utd',
+    bbcSlug: 'leeds-united',
     tableSlug: 'premier-league',
-    espnId: '360',
+    espnId: '357',
     leagueSlug: 'eng.1'
   },
   {
-    name: 'Plymouth Argyle',
-    searchName: 'Plymouth',
-    bbcSlug: 'plymouth-argyle',
-    tableSlug: 'league-one',
-    espnId: '307',
-    leagueSlug: 'eng.3'
-  },
-  {
-    name: 'Truro City',
-    searchName: 'Truro',
-    bbcSlug: 'truro-city',
-    tableSlug: 'national-league-south',
-    espnId: '11116',
-    leagueSlug: 'eng.6'
+    name: 'York City',
+    searchName: 'York City',
+    bbcSlug: 'york-city',
+    tableSlug: 'league-two',
+    espnId: '383',
+    leagueSlug: 'eng.4'
   }
 ];
 
