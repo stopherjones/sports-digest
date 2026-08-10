@@ -1,4 +1,18 @@
 /**
+ * Helper to construct Wikipedia links from a slug or event/team name
+ */
+function getWikipediaUrl(slugOrUrl) {
+  if (!slugOrUrl) return "";
+  const trimmed = slugOrUrl.toString().trim();
+  if (!trimmed) return "";
+  if (trimmed.startsWith("http://") || trimmed.startsWith("https://")) {
+    return trimmed;
+  }
+  const wikiSlug = trimmed.replace(/\s+/g, "_");
+  return `https://en.wikipedia.org/wiki/${encodeURI(wikiSlug)}`;
+}
+
+/**
  * Case-insensitive property lookup helper
  */
 function getVal(row, key) {
@@ -144,6 +158,12 @@ function createCard(row, category) {
   const cleanQuery = youtubeQuery.replace(/\s+/g, ' ').trim();
   const youtubeSearchUrl = `https://www.youtube.com/results?search_query=${encodeURIComponent(cleanQuery)}&sp=${spParam}`;
 
+  const rawEventName = getVal(row, "Event Name") || getVal(row, "event_name") || displayName;
+  const eventWikiUrl = getWikipediaUrl(rawEventName);
+  const titleHtml = eventWikiUrl
+    ? `<a href="${eventWikiUrl}" target="_blank" rel="noopener noreferrer" class="event-title-link">${displayName}</a>`
+    : displayName;
+
   const logoUrl = getVal(row, "Logo") || getVal(row, "logo");
   const logoHtml = logoUrl
     ? `<img src="${logoUrl}" alt="${displayName} logo" class="team-badge-img" onerror="this.style.display='none'" />`
@@ -158,7 +178,7 @@ function createCard(row, category) {
             ${sportName ? `<span class="sport-tag">${sportName}</span>` : ""}
             ${category === "climax" ? `<span class="climax-tag">🔥 Final Phase</span>` : ""}
           </div>
-          <div class="event-name">${displayName}</div>
+          <div class="event-name">${titleHtml}</div>
         </div>
       </div>
       <div class="dates">🗓️ ${getVal(row, "Start Date") || "TBD"} – ${getVal(row, "End Date") || "TBD"}</div>
@@ -168,11 +188,17 @@ function createCard(row, category) {
   const isUnfinished = (category === "ongoing" || category === "future" || category === "climax");
 
   if (isUnfinished && (climaxName || climaxDisplay)) {
+    const climaxSlug = getVal(row, "Climax slug") || getVal(row, "climax_slug");
+    const climaxWikiUrl = getWikipediaUrl(climaxSlug);
+    const climaxTitleHtml = climaxWikiUrl
+      ? `<a href="${climaxWikiUrl}" target="_blank" rel="noopener noreferrer" class="climax-title-link">${climaxName}</a>`
+      : climaxName;
+
     contentHtml += `
       <div class="climax-banner">
         <span class="climax-banner-icon">🏆</span>
         <div class="climax-banner-details">
-          <span class="climax-banner-title">${climaxName}</span>
+          <span class="climax-banner-title">${climaxTitleHtml}</span>
           ${climaxDisplay ? `<span class="climax-banner-date">${climaxDisplay}</span>` : ""}
         </div>
       </div>
@@ -389,7 +415,9 @@ async function renderTeamCards() {
                   <span class="sport-tag">${team.sport || 'Soccer'}</span>
                   <span class="climax-tag">${team.leaguePosition?.league || 'League'}</span>
                 </div>
-                <div class="event-name">${team.name}</div>
+                <div class="event-name">
+                  <a href="${team.wikiUrl || getWikipediaUrl(team.name)}" target="_blank" rel="noopener noreferrer" class="event-title-link">${team.name}</a>
+                </div>
               </div>
             </div>
           </div>

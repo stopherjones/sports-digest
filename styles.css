@@ -49,7 +49,7 @@ p.subtitle {
 }
 
 /* ==========================================================================
-   2. RESPONSIVE STICKY GLASSMORPHIC HEADER
+   2. RESPONSIVE STICKY HEADER
    ========================================================================== */
 header {
   position: sticky;
@@ -280,6 +280,17 @@ header h1 {
   color: var(--text);
 }
 
+.event-title-link {
+  color: var(--text);
+  text-decoration: none;
+  transition: color 0.15s ease, text-decoration 0.15s ease;
+}
+
+.event-title-link:hover {
+  color: var(--link-color);
+  text-decoration: underline;
+}
+
 .dates {
   font-size: 0.85rem;
   color: var(--text-muted);
@@ -312,6 +323,17 @@ header h1 {
   font-size: 0.825rem;
   font-weight: 700;
   color: #fda4af;
+}
+
+.climax-title-link {
+  color: #fda4af;
+  text-decoration: none;
+  transition: color 0.15s ease;
+}
+
+.climax-title-link:hover {
+  color: #ffffff;
+  text-decoration: underline;
 }
 
 .climax-banner-date {
