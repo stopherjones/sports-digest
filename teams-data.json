@@ -1,280 +1,46 @@
-import fs from 'fs/promises';
-
-// Configure teams with explicit sport and league identifiers
-const TEAMS = [
-  { id: '357', name: 'Leeds United', searchName: 'Leeds', sport: 'soccer', league: 'eng.1' },
-  { id: '383', name: 'York City', searchName: 'York City', sport: 'soccer', league: 'eng.4' },
-  // Example NFL configuration:
-  { id: '5', name: 'Cleveland Browns', searchName: 'Browns', sport: 'football', league: 'nfl' }
-];
-
-async function fetchTeamData(import fs from 'fs/promises';
-
-// Configure teams with explicit sport and league identifiers
-const TEAMS = [
-  { id: '357', name: 'Leeds United', searchName: 'Leeds', sport: 'soccer', league: 'eng.1' },
-  { id: '383', name: 'York City', searchName: 'York City', sport: 'soccer', league: 'eng.5' },
-  // Example NFL configuration:
-  // { id: '2', name: 'Buffalo Bills', searchName: 'Bills', sport: 'football', league: 'nfl' }
-];
-
-async function fetchTeamData(team) {
-  const { id, name, searchName, sport = 'soccer', league } = team;
-
-  // Build sport-specific endpoints
-  const scheduleUrl = `https://site.api.espn.com/apis/site/v2/sports/${sport}/${league}/teams/${id}/schedule`;
-  const standingsUrl = `https://site.api.espn.com/apis/v2/sports/${sport}/${league}/standings`;
-
-  let latestResult = null;
-  let nextFixture = null;
-  let leaguePosition = {
-    league: league.toUpperCase(),
-    rank: "N/A",
-    points: 0
-  };
-
-  try {
-    // 1. Fetch Schedule Data
-    const schedRes = await fetch(scheduleUrl);
-    if (schedRes.ok) {
-      const schedData = await schedRes.json();
-      const events = schedData.events || [];
-
-      // Completed Fixtures
-      const completedEvents = events.filter(e => e.competitions?.[0]?.status?.type?.completed);
-      if (completedEvents.length > 0) {
-        const last = completedEvents[completedEvents.length - 1];
-        const comp = last.competitions[0];
-        const home = comp.competitors.find(c => c.homeAway === 'home');
-        const away = comp.competitors.find(c => c.homeAway === 'away');
-
-        const isHome = String(home.team.id) === String(id);
-        const opponent = isHome ? away.team.displayName : home.team.displayName;
-        const score = `${home.score?.displayValue || home.score || 0} - ${away.score?.displayValue || away.score || 0}`;
-
-        latestResult = {
-          date: last.date,
-          opponent,
-          score,
-          isHome
-        };
-      }
-
-      // Next Upcoming Fixture
-      const upcomingEvents = events.filter(e => !e.competitions?.[0]?.status?.type?.completed);
-      if (upcomingEvents.length > 0) {
-        const next = upcomingEvents[0];
-        const comp = next.competitions[0];
-        const home = comp.competitors.find(c => c.homeAway === 'home');
-        const away = comp.competitors.find(c => c.homeAway === 'away');
-
-        const isHome = String(home.team.id) === String(id);
-        const opponent = isHome ? away.team.displayName : home.team.displayName;
-
-        nextFixture = {
-          date: next.date,
-          opponent,
-          isHome
-        };
+{
+  "updatedAt": "2026-08-10T09:46:05.713Z",
+  "teams": [
+    {
+      "id": "357",
+      "name": "Leeds United",
+      "searchName": "Leeds",
+      "latestResult": null,
+      "leaguePosition": {
+        "league": "ENG.1",
+        "rank": "N/A",
+        "points": 0
+      },
+      "nextFixture": null
+    },
+    {
+      "id": "383",
+      "name": "York City",
+      "searchName": "York City",
+      "latestResult": null,
+      "leaguePosition": {
+        "league": "ENG.5",
+        "rank": "N/A",
+        "points": 0
+      },
+      "nextFixture": null
+    },
+    {
+      "id": "5",
+      "name": "Cleveland Browns",
+      "searchName": "Cleveland Browns",
+      "latestResult": null,
+      "leaguePosition": {
+        "league": "NFL",
+        "rank": "N/A",
+        "points": 0
+      },
+      "nextFixture": {
+        "opponent": "Chicago Bears",
+        "date": "15 Aug",
+        "time": "18:00",
+        "competition": "NFL"
       }
     }
-
-    // 2. Fetch Standings Data
-    const standRes = await fetch(standingsUrl);
-    if (standRes.ok) {
-      const standData = await standRes.json();
-      const entries = extractStandingsEntries(standData);
-      const teamEntry = entries.find(e => String(e.team?.id) === String(id));
-
-      if (teamEntry) {
-        const stats = teamEntry.stats || [];
-        const rankStat = stats.find(s => s.name === 'rank' || s.type === 'rank');
-        
-        leaguePosition.rank = rankStat ? String(rankStat.value) : "N/A";
-
-        if (sport === 'soccer') {
-          const pointsStat = stats.find(s => s.name === 'points' || s.type === 'points');
-          leaguePosition.points = pointsStat ? Number(pointsStat.value) : 0;
-        } else if (sport === 'football') {
-          // NFL tracks W-L records rather than standard point tables
-          const wins = stats.find(s => s.name === 'wins')?.value ?? 0;
-          const losses = stats.find(s => s.name === 'losses')?.value ?? 0;
-          leaguePosition.points = `${wins}-${losses}`;
-        }
-      }
-    }
-  } catch (error) {
-    console.error(`Failed to update ${name}:`, error.message);
-  }
-
-  return {
-    id,
-    name,
-    searchName,
-    latestResult,
-    leaguePosition,
-    nextFixture
-  };
+  ]
 }
-
-// Flattens nested standings hierarchy (divisions/conferences)
-function extractStandingsEntries(data) {
-  let entries = [];
-  if (data.children) {
-    for (const child of data.children) {
-      entries = entries.concat(extractStandingsEntries(child));
-    }
-  }
-  if (data.standings?.entries) {
-    entries = entries.concat(data.standings.entries);
-  }
-  return entries;
-}
-
-async function main() {
-  const teamResults = [];
-  for (const team of TEAMS) {
-    const data = await fetchTeamData(team);
-    teamResults.push(data);
-  }
-
-  const output = {
-    updatedAt: new Date().toISOString(),
-    teams: teamResults
-  };
-
-  await fs.writeFile('teams-data.json', JSON.stringify(output, null, 2));
-  console.log('teams-data.json successfully updated.');
-}
-
-main();
-) {
-  const { id, name, searchName, sport = 'soccer', league } = team;
-
-  // Build sport-specific endpoints
-  const scheduleUrl = `https://site.api.espn.com/apis/site/v2/sports/${sport}/${league}/teams/${id}/schedule`;
-  const standingsUrl = `https://site.api.espn.com/apis/v2/sports/${sport}/${league}/standings`;
-
-  let latestResult = null;
-  let nextFixture = null;
-  let leaguePosition = {
-    league: league.toUpperCase(),
-    rank: "N/A",
-    points: 0
-  };
-
-  try {
-    // 1. Fetch Schedule Data
-    const schedRes = await fetch(scheduleUrl);
-    if (schedRes.ok) {
-      const schedData = await schedRes.json();
-      const events = schedData.events || [];
-
-      // Completed Fixtures
-      const completedEvents = events.filter(e => e.competitions?.[0]?.status?.type?.completed);
-      if (completedEvents.length > 0) {
-        const last = completedEvents[completedEvents.length - 1];
-        const comp = last.competitions[0];
-        const home = comp.competitors.find(c => c.homeAway === 'home');
-        const away = comp.competitors.find(c => c.homeAway === 'away');
-
-        const isHome = String(home.team.id) === String(id);
-        const opponent = isHome ? away.team.displayName : home.team.displayName;
-        const score = `${home.score?.displayValue || home.score || 0} - ${away.score?.displayValue || away.score || 0}`;
-
-        latestResult = {
-          date: last.date,
-          opponent,
-          score,
-          isHome
-        };
-      }
-
-      // Next Upcoming Fixture
-      const upcomingEvents = events.filter(e => !e.competitions?.[0]?.status?.type?.completed);
-      if (upcomingEvents.length > 0) {
-        const next = upcomingEvents[0];
-        const comp = next.competitions[0];
-        const home = comp.competitors.find(c => c.homeAway === 'home');
-        const away = comp.competitors.find(c => c.homeAway === 'away');
-
-        const isHome = String(home.team.id) === String(id);
-        const opponent = isHome ? away.team.displayName : home.team.displayName;
-
-        nextFixture = {
-          date: next.date,
-          opponent,
-          isHome
-        };
-      }
-    }
-
-    // 2. Fetch Standings Data
-    const standRes = await fetch(standingsUrl);
-    if (standRes.ok) {
-      const standData = await standRes.json();
-      const entries = extractStandingsEntries(standData);
-      const teamEntry = entries.find(e => String(e.team?.id) === String(id));
-
-      if (teamEntry) {
-        const stats = teamEntry.stats || [];
-        const rankStat = stats.find(s => s.name === 'rank' || s.type === 'rank');
-        
-        leaguePosition.rank = rankStat ? String(rankStat.value) : "N/A";
-
-        if (sport === 'soccer') {
-          const pointsStat = stats.find(s => s.name === 'points' || s.type === 'points');
-          leaguePosition.points = pointsStat ? Number(pointsStat.value) : 0;
-        } else if (sport === 'football') {
-          // NFL tracks W-L records rather than standard point tables
-          const wins = stats.find(s => s.name === 'wins')?.value ?? 0;
-          const losses = stats.find(s => s.name === 'losses')?.value ?? 0;
-          leaguePosition.points = `${wins}-${losses}`;
-        }
-      }
-    }
-  } catch (error) {
-    console.error(`Failed to update ${name}:`, error.message);
-  }
-
-  return {
-    id,
-    name,
-    searchName,
-    latestResult,
-    leaguePosition,
-    nextFixture
-  };
-}
-
-// Flattens nested standings hierarchy (divisions/conferences)
-function extractStandingsEntries(data) {
-  let entries = [];
-  if (data.children) {
-    for (const child of data.children) {
-      entries = entries.concat(extractStandingsEntries(child));
-    }
-  }
-  if (data.standings?.entries) {
-    entries = entries.concat(data.standings.entries);
-  }
-  return entries;
-}
-
-async function main() {
-  const teamResults = [];
-  for (const team of TEAMS) {
-    const data = await fetchTeamData(team);
-    teamResults.push(data);
-  }
-
-  const output = {
-    updatedAt: new Date().toISOString(),
-    teams: teamResults
-  };
-
-  await fs.writeFile('teams-data.json', JSON.stringify(output, null, 2));
-  console.log('teams-data.json successfully updated.');
-}
-
-main();
