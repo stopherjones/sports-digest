@@ -327,9 +327,11 @@ async function renderTeamCards() {
       if (team.leaguePosition && team.leaguePosition.rank !== 'N/A') {
         const rankOrd = getOrdinal(team.leaguePosition.rank);
         const playedStr = team.leaguePosition.played ? `, P${team.leaguePosition.played}` : '';
-        leaguePosText = `${rankOrd} (${team.leaguePosition.points || 0} pts${playedStr})`;
+        const ptsStr = typeof team.leaguePosition.points === 'number' ? `${team.leaguePosition.points} pts` : (team.leaguePosition.points || '');
+        leaguePosText = `${rankOrd} (${ptsStr}${playedStr})`;
       } else if (team.leaguePosition?.league) {
-        leaguePosText = team.leaguePosition.league;
+        const ptsStr = team.leaguePosition.points ? ` (${team.leaguePosition.points})` : '';
+        leaguePosText = `${team.leaguePosition.league}${ptsStr}`;
       }
 
       let nextFixtureText = 'N/A';
@@ -339,16 +341,47 @@ async function renderTeamCards() {
         nextFixtureText = `vs ${team.nextFixture.opponent || 'TBD'}${timeStr}${compStr}`.trim();
       }
 
-      const cupText = team.cupProgress || 'N/A';
+      let cupSectionHtml = '';
+      if (Array.isArray(team.cups) && team.cups.length > 0 && team.sport !== 'American Football') {
+        const cupsListHtml = team.cups.map(c => `
+          <div class="cup-item">
+            <span class="cup-name">${c.name}:</span>
+            <span class="cup-status ${c.isEliminated ? 'status-eliminated' : 'status-active'}">${c.status}</span>
+          </div>
+        `).join('');
+
+        cupSectionHtml = `
+          <div class="data-row cup-progress-row">
+            <span class="data-label">Cup Progress</span>
+            <div class="cup-list">${cupsListHtml}</div>
+          </div>
+        `;
+      } else if (typeof team.cupProgress === 'string' && team.cupProgress !== 'N/A' && team.sport !== 'American Football') {
+        cupSectionHtml = `
+          <div class="data-row">
+            <span class="data-label">Cup Progress</span>
+            <span class="data-value">${team.cupProgress}</span>
+          </div>
+        `;
+      }
+
+      const logoHtml = team.logo
+        ? `<img src="${team.logo}" alt="${team.name} badge" class="team-badge-img" onerror="this.style.display='none'" />`
+        : '';
 
       cardsHtml += `
         <div class="card ongoing">
           <div class="card-header">
-            <div class="tag-row">
-              <span class="sport-tag">Football</span>
-              <span class="climax-tag">${team.leaguePosition?.league || 'League'}</span>
+            <div class="card-header-flex">
+              ${logoHtml}
+              <div class="header-titles">
+                <div class="tag-row">
+                  <span class="sport-tag">${team.sport || 'Soccer'}</span>
+                  <span class="climax-tag">${team.leaguePosition?.league || 'League'}</span>
+                </div>
+                <div class="event-name">${team.name}</div>
+              </div>
             </div>
-            <div class="event-name">${team.name}</div>
           </div>
           <div class="card-body">
             <div class="data-row">
@@ -363,10 +396,7 @@ async function renderTeamCards() {
               <span class="data-label">Next Fixture (${team.nextFixture?.date || 'N/A'})</span>
               <span class="data-value">${nextFixtureText}</span>
             </div>
-            <div class="data-row">
-              <span class="data-label">Cup Progress</span>
-              <span class="data-value">${cupText}</span>
-            </div>
+            ${cupSectionHtml}
             <div class="card-actions">
               <a href="${aiUrl}" target="_blank" class="ai-search-btn">✨ AI Overview</a>
               <a href="${ytUrl}" target="_blank" class="yt-search-btn">▶️ Highlights</a>
