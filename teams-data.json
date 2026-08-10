@@ -1,55 +1,46 @@
 {
-  "updatedAt": "2026-08-10T09:17:36.873Z",
+  "updatedAt": "2026-08-10T09:25:10.510Z",
   "teams": [
     {
-      "id": "leeds-united",
+      "id": "357",
       "name": "Leeds United",
-      "searchName": "Leeds Utd",
-      "latestResult": {
-        "opponent": "RB Leipzig",
-        "score": "2–0",
-        "result": "W",
-        "date": "8 Aug",
-        "competition": "Club Friendlies - Club Friendlies 3"
-      },
+      "searchName": "Leeds",
+      "latestResult": null,
       "leaguePosition": {
-        "league": "premier-league",
+        "league": "ENG.1",
         "rank": "N/A",
-        "points": 0,
-        "played": 0
+        "points": 0
       },
-      "nextFixture": {
-        "opponent": "Manchester United",
-        "date": "12 Aug",
-        "time": "18:30",
-        "competition": "Club Friendlies - Club Friendlies 1"
-      },
-      "cupProgress": "None active"
+      "nextFixture": null
     },
     {
-      "id": "york-city",
+      "id": "383",
       "name": "York City",
       "searchName": "York City",
-      "latestResult": {
-        "opponent": "Crawley Town",
-        "score": "0–2",
-        "result": "L",
-        "date": "3 Aug",
-        "competition": "League Cup - Preliminary Round"
-      },
+      "latestResult": null,
       "leaguePosition": {
-        "league": "League Two",
-        "rank": 24,
-        "points": 0,
-        "played": 0
+        "league": "ENG.5",
+        "rank": "N/A",
+        "points": 0
+      },
+      "nextFixture": null
+    },
+    {
+      "id": "5",
+      "name": "Cleveland Browns",
+      "searchName": "Cleveland Browns",
+      "latestResult": null,
+      "leaguePosition": {
+        "league": "NFL",
+        "rank": "N/A",
+        "points": 0
       },
       "nextFixture": {
-        "opponent": "Bristol Rovers",
+        "opponent": "Chicago Bears",
         "date": "15 Aug",
-        "time": "14:00",
-        "competition": "League Two"
-      },
-      "cupProgress": "League Cup - Preliminary Round • EFL Trophy - Group Stage - Northern Group C"
+        "time": "18:00",
+        "competition": "NFL"
+      }
     }
   ]
 }
