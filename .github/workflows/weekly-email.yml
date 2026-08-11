@@ -39,6 +39,6 @@ jobs:
           username: ${{ secrets.MAIL_USERNAME || secrets.SMTP_USERNAME }}
           password: ${{ secrets.MAIL_PASSWORD || secrets.SMTP_PASSWORD }}
           subject: "🏆 Weekly Sports Summary"
-          to: ${{ secrets.MAIL_TO || secrets.NOTIFICATION_EMAIL || 'chrisjones59@gmail.com' }}
-          from: ${{ secrets.MAIL_FROM || secrets.MAIL_USERNAME || secrets.SMTP_USERNAME || 'Sports Digest <noreply@sports-digest.com>' }}
+          to: ${{ secrets.MAIL_TO || secrets.NOTIFICATION_EMAIL }}
+          from: ${{ secrets.MAIL_FROM || secrets.MAIL_USERNAME || secrets.SMTP_USERNAME }}
           html_body: file://digest-email.html
