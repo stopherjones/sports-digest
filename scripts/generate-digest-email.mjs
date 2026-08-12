@@ -114,7 +114,7 @@ function getEventLinks(row, category) {
   const displayName = getVal(row, "Common Name") || getVal(row, "Event Name") || "Event";
   
   const searchQuery = `${displayName} format status schedule results highlights defending champion`;
-  const aiOverviewUrl = `https://www.google.com/search?q=${encodeURIComponent(searchQuery)}&udm=50`;
+  const aiOverviewUrl = `https://www.google.com/search?q=${encodeURIComponent(searchQuery)}`;
 
   let youtubeQuery = "";
   let ytBtnLabel = "▶️ Preview";
@@ -222,7 +222,7 @@ export function generateDigestHtml(eventsData, teamsData, today = new Date()) {
 
       html += `        <li style="margin-bottom:10px;">
           <strong style="color:#ffffff;">${name}</strong>${dateText ? ` (${dateText})` : ''} — 
-          <a href="${aiOverviewUrl}" style="color:#60a5fa; text-decoration:none;">✨ AI Overview</a> | 
+          <a href="${aiOverviewUrl}" style="color:#60a5fa; text-decoration:none;">Web summary</a> | 
           <a href="${youtubeUrl}" style="color:#f43f5e; text-decoration:none;">${ytBtnLabel}</a>
         </li>\n`;
     });
@@ -255,7 +255,7 @@ export function generateDigestHtml(eventsData, teamsData, today = new Date()) {
 
       html += `        <li style="margin-bottom:10px;">
           <strong style="color:#ffffff;">${name}</strong>${dateText ? ` (Ended ${dateText})` : ''}${detailsStr ? ` — <em style="color:#94a3b8;">${detailsStr}</em>` : ''} — 
-          <a href="${aiOverviewUrl}" style="color:#60a5fa; text-decoration:none;">✨ AI Overview</a> | 
+          <a href="${aiOverviewUrl}" style="color:#60a5fa; text-decoration:none;">Web summary</a> | 
           <a href="${youtubeUrl}" style="color:#f43f5e; text-decoration:none;">${ytBtnLabel}</a>
         </li>\n`;
     });
@@ -281,7 +281,7 @@ export function generateDigestHtml(eventsData, teamsData, today = new Date()) {
 
       html += `        <li style="margin-bottom:10px;">
           <strong style="color:#ffffff;">${name}</strong>${dateText ? ` (Starts ${dateText})` : ''} — 
-          <a href="${aiOverviewUrl}" style="color:#60a5fa; text-decoration:none;">✨ AI Overview</a> | 
+          <a href="${aiOverviewUrl}" style="color:#60a5fa; text-decoration:none;">Web summary</a> | 
           <a href="${youtubeUrl}" style="color:#f43f5e; text-decoration:none;">${ytBtnLabel}</a>
         </li>\n`;
     });

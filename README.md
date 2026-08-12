@@ -7,7 +7,7 @@ A sports tournament and team tracker displaying ongoing, upcoming, and finished 
 A GitHub Action (`.github/workflows/weekly-email.yml`) runs automatically **every Monday at 11:00 AM UTC** (or manually via the "Run workflow" button in the GitHub Actions tab).
 
 ### What the Email Digest Includes:
-1. **🏁 Recently Finished Events**: Tournaments and events that completed in the last 14 days, with final scores, winners, Google AI Overview links, and YouTube Highlight links.
+1. **🏁 Recently Finished Events**: Tournaments and events that completed in the last 14 days, with final scores, winners, Google Web summary links, and YouTube Highlight links.
 2. **🔥 Season Climaxes**: Finals and climax phases occurring in the current week or next 14 days.
 3. **📅 Upcoming Events**: Tournaments and leagues starting in the next 30–45 days.
 4. **📊 Tracked Teams Standings & Status**: Live standings/records, latest match results, next upcoming fixtures, and cup tournament progress for Leeds United, York City, and Cleveland Browns.

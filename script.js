@@ -134,7 +134,7 @@ function createCard(row, category) {
   }
 
   const searchQuery = `${displayName} format status schedule results highlights defending champion`;
-  const googleSearchUrl = `https://www.google.com/search?q=${encodeURIComponent(searchQuery)}&udm=50`;
+  const googleSearchUrl = `https://www.google.com/search?q=${encodeURIComponent(searchQuery)}`;
   
   let youtubeQuery = "";
   let ytBtnLabel = "";
@@ -246,7 +246,7 @@ function createCard(row, category) {
   contentHtml += `
       <div class="card-actions">
         <a href="${googleSearchUrl}" target="_blank" class="ai-search-btn">
-          ✨ AI Overview
+          Web summary
         </a>
         <a href="${youtubeSearchUrl}" target="_blank" class="yt-search-btn">
           ${ytBtnLabel}
@@ -349,7 +349,7 @@ async function renderTeamCards() {
       const aiSearchQuery = `${team.name.toLowerCase()} vs ${opponent} match summary analysis, next fixture preview`;
       const ytSearchQuery = `${searchTeam} ${opponent} highlights`;
 
-      const aiUrl = `https://www.google.com/search?q=${encodeURIComponent(aiSearchQuery)}&udm=50`;
+      const aiUrl = `https://www.google.com/search?q=${encodeURIComponent(aiSearchQuery)}`;
       const ytUrl = `https://www.youtube.com/results?search_query=${encodeURIComponent(ytSearchQuery)}&sp=EgQIAxAD`;
 
       let latestResultText = 'N/A';
@@ -436,7 +436,7 @@ async function renderTeamCards() {
             </div>
             ${cupSectionHtml}
             <div class="card-actions">
-              <a href="${aiUrl}" target="_blank" class="ai-search-btn">✨ AI Overview</a>
+              <a href="${aiUrl}" target="_blank" class="ai-search-btn">Web summary</a>
               <a href="${ytUrl}" target="_blank" class="yt-search-btn">▶️ Highlights</a>
             </div>
           </div>
