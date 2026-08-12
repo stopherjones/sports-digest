@@ -423,7 +423,7 @@ header h1 {
   border-top: 1px solid var(--border);
 }
 
-.ai-search-btn,
+.search-btn,
 .yt-search-btn {
   min-width: 0;
   display: inline-flex;
@@ -443,15 +443,15 @@ header h1 {
   -webkit-tap-highlight-color: transparent;
 }
 
-/* Google AI Overview Button (60% Width) */
-.ai-search-btn {
+/* Web search overview button (60% Width) */
+.search-btn {
   flex: 6 1 0;
   background: rgba(59, 130, 246, 0.1);
   border: 1px solid rgba(59, 130, 246, 0.3);
   color: var(--link-color);
 }
 
-.ai-search-btn:hover {
+.search-btn:hover {
   background: rgba(59, 130, 246, 0.25);
   border-color: var(--link-color);
   color: #93c5fd;

@@ -7,6 +7,18 @@
   <title>Stopherjones' Sports Tracker</title>
   <meta name="google-site-verification" content="z9n0lhtaop9VH_-yYuA5LYSZueR5IFPOXtmz3ffvnMw" />
   <link rel="stylesheet" href="styles.css">
+  <meta http-equiv="Content-Security-Policy" content="
+  default-src 'self';
+  script-src 'self' 'unsafe-inline';
+  style-src 'self' 'unsafe-inline';
+  img-src 'self' https: data:;
+  connect-src 'self' https://gist.githubusercontent.com https://www.bbc.com https://site.api.espn.com;
+">
+  <!-- Restricts detailed referrer URLs from leaking to external domains -->
+  <meta name="referrer" content="strict-origin-when-cross-origin">
+
+  <!-- Tells browsers to prevent mime-type sniffing -->
+  <meta http-equiv="X-Content-Type-Options" content="nosniff">
 </head>
 
 <body>

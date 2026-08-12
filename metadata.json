@@ -1,8 +1,4 @@
 {
   "name": "Stopherjones' Sports Tracker",
-  "description": "Sports tournament and team tracker displaying ongoing, upcoming, and finished events.",
-  "requestFramePermissions": [],
-  "majorCapabilities": [
-    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
-  ]
+  "description": "Sports tournament and team tracker displaying ongoing, upcoming, and finished events."
 }

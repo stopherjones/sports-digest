@@ -245,10 +245,10 @@ function createCard(row, category) {
 
   contentHtml += `
       <div class="card-actions">
-        <a href="${googleSearchUrl}" target="_blank" class="ai-search-btn">
+        <a href="${googleSearchUrl}" target="_blank" rel="noopener noreferrer" class="search-btn">
           Web summary
         </a>
-        <a href="${youtubeSearchUrl}" target="_blank" class="yt-search-btn">
+        <a href="${youtubeSearchUrl}" target="_blank" rel="noopener noreferrer" class="yt-search-btn">
           ${ytBtnLabel}
         </a>
       </div>
@@ -322,11 +322,13 @@ function getOrdinal(n) {
 }
 
 /**
- * Fetches teams-data.json and dynamically renders cards for all API-tracked teams
+ * Fetches teams-data.json from GitHub Gist and dynamically renders cards for all API-tracked teams
  */
 async function renderTeamCards() {
   try {
-    const res = await fetch('./teams-data.json');
+    const TEAMS_GIST_URL = "https://gist.githubusercontent.com/stopherjones/df101fec6442b12489eeec1296a743b6/raw/teams-data.json";
+
+    const res = await fetch(TEAMS_GIST_URL + "?_=" + Date.now());
     if (!res.ok) return;
     const data = await res.json();
     if (!data.teams || data.teams.length === 0) return;
@@ -436,7 +438,7 @@ async function renderTeamCards() {
             </div>
             ${cupSectionHtml}
             <div class="card-actions">
-              <a href="${aiUrl}" target="_blank" class="ai-search-btn">Web summary</a>
+              <a href="${aiUrl}" target="_blank" class="search-btn">Web summary</a>
               <a href="${ytUrl}" target="_blank" class="yt-search-btn">▶️ Highlights</a>
             </div>
           </div>
@@ -456,7 +458,7 @@ async function renderTeamCards() {
     dashboard.insertBefore(teamsSection, dashboard.firstChild);
 
   } catch (err) {
-    console.error("Could not load teams-data.json:", err);
+    console.error("Could not load teams-data.json from Gist:", err);
   }
 }
 
@@ -516,8 +518,10 @@ window.addEventListener("DOMContentLoaded", async () => {
   // 1. Fetch tracked API teams data
   await renderTeamCards();
 
-  // 2. Fetch static tournament data
-  fetch("./data.json")
+  // 2. Fetch sports tournament data from Public Gist
+  const SPORTS_GIST_URL = "https://gist.githubusercontent.com/stopherjones/9c7621ceb2341ea9cd2fa03f945b6e00/raw/data.json";
+
+  fetch(SPORTS_GIST_URL + "?_=" + Date.now())
     .then(response => {
       if (!response.ok) {
         throw new Error(`HTTP error! Status: ${response.status}`);
