@@ -232,18 +232,18 @@ export function generateDigestHtml(eventsData, teamsData, today = new Date()) {
   if (teams.length === 0) {
     html += `      <p style="margin:0; font-size:13px; color:#94a3b8; font-style:italic;">No followed teams tracked.</p>\n`;
   } else {
-    html += `      <div style="display:flex; flex-direction:column; gap:12px;">\n`;
+    html += `      <table width="100%" cellpadding="0" cellspacing="0" border="0" style="width:100%; border-collapse:collapse;">\n`;
     teams.forEach(team => {
       const logoHtml = team.logo
-        ? `<img src="${team.logo}" alt="${team.name}" style="width:22px; height:22px; object-fit:contain; vertical-align:middle; margin-right:8px; border-radius:3px;" />`
+        ? `<img src="${team.logo}" alt="${team.name}" width="22" height="22" style="width:22px; height:22px; object-fit:contain; vertical-align:middle; margin-right:8px; border-radius:3px; display:inline-block;" />`
         : '';
 
       // Latest Result
       let lastResultText = 'None';
       if (team.latestResult) {
-        const resBadge = team.latestResult.result ? `[${team.latestResult.result}] ` : '';
-        const comp = team.latestResult.competition ? ` (${team.latestResult.competition})` : '';
-        const dateStr = team.latestResult.date ? ` on ${team.latestResult.date}` : '';
+        const resBadge = team.latestResult.result ? `<span style="display:inline-block; font-weight:700; color:#10b981; margin-right:4px;">[${team.latestResult.result}]</span>` : '';
+        const comp = team.latestResult.competition ? ` <span style="color:#94a3b8; font-size:12px;">(${team.latestResult.competition})</span>` : '';
+        const dateStr = team.latestResult.date ? ` <span style="color:#94a3b8; font-size:12px;">— ${team.latestResult.date}</span>` : '';
         lastResultText = `${resBadge}${team.latestResult.score || ''} vs ${team.latestResult.opponent || 'Opponent'}${comp}${dateStr}`.trim();
       }
 
@@ -254,7 +254,7 @@ export function generateDigestHtml(eventsData, teamsData, today = new Date()) {
         const leagueName = team.leaguePosition.league || 'League';
         const played = team.leaguePosition.played ? `, P${team.leaguePosition.played}` : '';
         const points = typeof team.leaguePosition.points === 'number' ? `${team.leaguePosition.points} pts` : (team.leaguePosition.points || '');
-        leaguePosText = `${leagueName}: ${rankOrd} (${points}${played})`;
+        leaguePosText = `<strong>${rankOrd}</strong> in ${leagueName} <span style="color:#94a3b8; font-size:12px;">(${points}${played})</span>`;
       } else if (team.leaguePosition?.league) {
         const points = team.leaguePosition.points ? ` (${team.leaguePosition.points})` : '';
         leaguePosText = `${team.leaguePosition.league}${points}`;
@@ -265,9 +265,9 @@ export function generateDigestHtml(eventsData, teamsData, today = new Date()) {
       if (team.nextFixture) {
         const opp = team.nextFixture.opponent || 'TBD';
         const dateStr = team.nextFixture.date || '';
-        const timeStr = team.nextFixture.time && team.nextFixture.time !== 'TBD' ? ` ${team.nextFixture.time}` : '';
-        const comp = team.nextFixture.competition ? ` (${team.nextFixture.competition})` : '';
-        nextFixtureText = `vs ${opp} — ${dateStr}${timeStr}${comp}`.trim();
+        const timeStr = team.nextFixture.time && team.nextFixture.time !== 'TBD' ? ` at ${team.nextFixture.time}` : '';
+        const comp = team.nextFixture.competition ? ` <span style="color:#94a3b8; font-size:12px;">(${team.nextFixture.competition})</span>` : '';
+        nextFixtureText = `vs <strong>${opp}</strong> — ${dateStr}${timeStr}${comp}`.trim();
       }
 
       const opponent = team.latestResult?.opponent || "Opponent";
@@ -275,22 +275,50 @@ export function generateDigestHtml(eventsData, teamsData, today = new Date()) {
       const aiSearchUrl = `https://www.google.com/search?q=${encodeURIComponent(`${team.name} vs ${opponent} match summary analysis, next fixture preview`)}`;
       const ytSearchUrl = `https://www.youtube.com/results?search_query=${encodeURIComponent(`${searchTeam} ${opponent} highlights`)}&sp=EgQIAxAD`;
 
-      html += `        <div style="background-color:#0f172a; border:1px solid #334155; border-radius:8px; padding:12px 14px;">
-          <div style="font-size:14px; font-weight:700; color:#ffffff; margin-bottom:6px; display:flex; align-items:center;">
-            ${logoHtml}<span>${team.name} <span style="font-size:11px; color:#94a3b8; font-weight:normal;">(${team.sport || 'Sport'})</span></span>
-          </div>
-          <div style="font-size:13px; color:#cbd5e1; line-height:1.6;">
-            <div><span style="color:#94a3b8; font-weight:600;">Latest Result:</span> <span style="color:#f8fafc;">${lastResultText}</span></div>
-            <div><span style="color:#94a3b8; font-weight:600;">League Position:</span> <span style="color:#f8fafc;">${leaguePosText}</span></div>
-            <div><span style="color:#94a3b8; font-weight:600;">Next Fixture:</span> <span style="color:#f8fafc;">${nextFixtureText}</span></div>
-          </div>
-          <div style="margin-top:8px; font-size:12px;">
-            <a href="${aiSearchUrl}" style="color:#60a5fa; text-decoration:none; margin-right:12px;">Web summary</a>
-            <a href="${ytSearchUrl}" style="color:#10b981; text-decoration:none;">▶️ Highlights</a>
-          </div>
-        </div>\n`;
+      html += `        <tr>
+          <td style="padding-bottom:14px;">
+            <div style="background-color:#0f172a; border:1px solid #334155; border-radius:8px; padding:14px 16px; width:100%; box-sizing:border-box;">
+              
+              <!-- Team Header -->
+              <div style="font-size:15px; font-weight:700; color:#ffffff; padding-bottom:8px; margin-bottom:8px; border-bottom:1px solid rgba(255,255,255,0.06);">
+                ${logoHtml}<span style="vertical-align:middle;">${team.name}</span>
+                <span style="font-size:11px; color:#94a3b8; font-weight:normal; margin-left:6px; vertical-align:middle;">(${team.sport || 'Sport'})</span>
+              </div>
+              
+              <!-- Stacked Team Updates -->
+              <div style="width:100%;">
+                
+                <!-- 1. Latest Result Row -->
+                <div style="padding:4px 0; font-size:13px; color:#cbd5e1; line-height:1.5;">
+                  <div style="font-size:11px; font-weight:700; color:#94a3b8; text-transform:uppercase; letter-spacing:0.04em; margin-bottom:2px;">Latest Result</div>
+                  <div style="color:#f8fafc;">${lastResultText}</div>
+                </div>
+
+                <!-- 2. League Position Row -->
+                <div style="padding:4px 0; font-size:13px; color:#cbd5e1; line-height:1.5; border-top:1px dashed rgba(255,255,255,0.06); margin-top:4px;">
+                  <div style="font-size:11px; font-weight:700; color:#94a3b8; text-transform:uppercase; letter-spacing:0.04em; margin-bottom:2px;">League Position</div>
+                  <div style="color:#f8fafc;">${leaguePosText}</div>
+                </div>
+
+                <!-- 3. Next Fixture Row -->
+                <div style="padding:4px 0; font-size:13px; color:#cbd5e1; line-height:1.5; border-top:1px dashed rgba(255,255,255,0.06); margin-top:4px;">
+                  <div style="font-size:11px; font-weight:700; color:#94a3b8; text-transform:uppercase; letter-spacing:0.04em; margin-bottom:2px;">Next Fixture</div>
+                  <div style="color:#f8fafc;">${nextFixtureText}</div>
+                </div>
+
+              </div>
+
+              <!-- Quick Links -->
+              <div style="margin-top:10px; padding-top:8px; border-top:1px solid rgba(255,255,255,0.06); font-size:12px;">
+                <a href="${aiSearchUrl}" style="color:#60a5fa; text-decoration:none; margin-right:14px; font-weight:500;">Web summary →</a>
+                <a href="${ytSearchUrl}" style="color:#10b981; text-decoration:none; font-weight:500;">▶️ Video highlights →</a>
+              </div>
+
+            </div>
+          </td>
+        </tr>\n`;
     });
-    html += `      </div>\n`;
+    html += `      </table>\n`;
   }
   html += `    </div>\n`;
 
