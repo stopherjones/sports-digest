@@ -142,21 +142,22 @@ function createCard(row, category) {
 
   if (category === "finished" || category === "past") {
     youtubeQuery = `${displayName} final highlights recap`;
-    ytBtnLabel = "▶️ Highlights";
+    ytBtnLabel = "▶️ YT Highlights";
   } else if (category === "ongoing") {
     youtubeQuery = `${displayName} latest highlights`;
-    ytBtnLabel = "▶️ Latest highlights";
+    ytBtnLabel = "▶️ YT Highlights";
     spParam = "EgQIAxAD";
   } else if (category === "climax") {
     youtubeQuery = `${displayName} ${climaxName || 'final'} preview`;
-    ytBtnLabel = "▶️ Preview";
+    ytBtnLabel = "▶️ YT Preview";
   } else {
     youtubeQuery = `${displayName} preview teaser promo`;
-    ytBtnLabel = "▶️ Preview / Teaser";
+    ytBtnLabel = "▶️ YT Preview";
   }
 
   const cleanQuery = youtubeQuery.replace(/\s+/g, ' ').trim();
   const youtubeSearchUrl = `https://www.youtube.com/results?search_query=${encodeURIComponent(cleanQuery)}&sp=${spParam}`;
+  const tvLink = getVal(row, "TV-link").toString().trim();
 
   const rawEventName = getVal(row, "Event Name") || getVal(row, "event_name") || displayName;
   const eventWikiUrl = getWikipediaUrl(rawEventName);
@@ -244,10 +245,11 @@ function createCard(row, category) {
   }
 
   contentHtml += `
-      <div class="card-actions">
+      <div class="card-actions${tvLink ? " has-tv-link" : ""}">
         <a href="${googleSearchUrl}" target="_blank" rel="noopener noreferrer" class="search-btn">
           Web summary
         </a>
+        ${tvLink ? `<a href="${tvLink}" target="_blank" rel="noopener noreferrer" class="tv-search-btn">TV link</a>` : ""}
         <a href="${youtubeSearchUrl}" target="_blank" rel="noopener noreferrer" class="yt-search-btn">
           ${ytBtnLabel}
         </a>
@@ -353,6 +355,7 @@ async function renderTeamCards() {
 
       const aiUrl = `https://www.google.com/search?q=${encodeURIComponent(aiSearchQuery)}`;
       const ytUrl = `https://www.youtube.com/results?search_query=${encodeURIComponent(ytSearchQuery)}&sp=EgQIAxAD`;
+      const tvLink = Object.entries(team).find(([key]) => key.trim().toLowerCase() === "tv-link")?.[1]?.toString().trim() || "";
 
       let latestResultText = 'N/A';
       if (team.latestResult) {
@@ -437,9 +440,10 @@ async function renderTeamCards() {
               <span class="data-value">${nextFixtureText}</span>
             </div>
             ${cupSectionHtml}
-            <div class="card-actions">
+            <div class="card-actions${tvLink ? ' has-tv-link' : ''}">
               <a href="${aiUrl}" target="_blank" class="search-btn">Web summary</a>
-              <a href="${ytUrl}" target="_blank" class="yt-search-btn">▶️ Highlights</a>
+              ${tvLink ? `<a href="${tvLink}" target="_blank" rel="noopener noreferrer" class="tv-search-btn">TV link</a>` : ''}
+              <a href="${ytUrl}" target="_blank" class="yt-search-btn">▶️ YT Highlights</a>
             </div>
           </div>
         </div>

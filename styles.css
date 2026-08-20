@@ -424,6 +424,7 @@ header h1 {
 }
 
 .search-btn,
+.tv-search-btn,
 .yt-search-btn {
   min-width: 0;
   display: inline-flex;
@@ -443,12 +444,29 @@ header h1 {
   -webkit-tap-highlight-color: transparent;
 }
 
+.tv-search-btn {
+  flex: 3 1 0;
+  background: rgba(16, 185, 129, 0.1);
+  border: 1px solid rgba(16, 185, 129, 0.3);
+  color: #6ee7b7;
+}
+
+.tv-search-btn:hover {
+  background: rgba(16, 185, 129, 0.25);
+  border-color: #10b981;
+  color: #a7f3d0;
+}
+
 /* Web search overview button (60% Width) */
 .search-btn {
   flex: 6 1 0;
   background: rgba(59, 130, 246, 0.1);
   border: 1px solid rgba(59, 130, 246, 0.3);
   color: var(--link-color);
+}
+
+.card-actions.has-tv-link .search-btn {
+  flex: 4 1 0;
 }
 
 .search-btn:hover {
@@ -463,6 +481,10 @@ header h1 {
   background: rgba(244, 63, 94, 0.1);
   border: 1px solid rgba(244, 63, 94, 0.3);
   color: #fda4af;
+}
+
+.card-actions.has-tv-link .yt-search-btn {
+  flex: 3 1 0;
 }
 
 .yt-search-btn:hover {
